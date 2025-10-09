@@ -1,12 +1,5 @@
 ﻿# Semantic Layer Architecture Overview
 
-## Improved Prompt
-Produce a concise architecture overview for the Databricks invoice analytics semantic layer that:
-1. States the problem this semantic layer solves and the value it delivers.
-2. Identifies the core building blocks (platform, data layers, semantic assets, consumption) and shows how they connect.
-3. Supplies easy-to-read visuals (layered architecture, data flow, deployment flowchart) with plain-English explanations.
-4. Summarises why each component matters so stakeholders can understand the end-to-end story without technical deep dives.
-
 ## Audience & Intent
 - **Who**: Product owners, analytics leaders, and engineering stakeholders who need the "big picture" view.
 - **What**: High-level structure of the semantic layer, how data moves, and the major control points.
@@ -114,3 +107,4 @@ flowchart TD
 - Validation, automation, and documentation are not optional extras-they protect trust and speed.
 
 For deeper technical detail, owners can refer to `ARCHITECTURE_DETAILED.md`.
+
