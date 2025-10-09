@@ -1,0 +1,111 @@
+﻿bundle:
+  name: invoice-analytics-semantic-poc
+
+vars:
+  catalog: cfascdodev_primary
+  schema_gold: invoice_gold_semantic_poc
+  schema_sem: invoice_semantic_poc
+  warehouse_name: "General Purpose"
+
+workspace:
+  host: ${workspace.host}
+
+resources:
+  jobs:
+    semantic_layer_deploy:
+      name: Invoice Analytics Semantic PoC Deploy
+      max_concurrent_runs: 1
+      tasks:
+        - task_key: sql_01_schemas
+          description: Provision PoC schemas
+          depends_on: []
+          sql_task:
+            file_path: ../sql_semantic_poc/01_schemas_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_02_gold_tables
+          description: Create PoC gold tables
+          depends_on:
+            - sql_01_schemas
+          sql_task:
+            file_path: ../sql_semantic_poc/02_gold_tables_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_03_seed_data
+          description: Load PoC seed data
+          depends_on:
+            - sql_02_gold_tables
+          sql_task:
+            file_path: ../sql_semantic_poc/03_seed_data_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_04_relationships
+          description: Populate relationship registry
+          depends_on:
+            - sql_03_seed_data
+          sql_task:
+            file_path: ../sql_semantic_poc/04_relationship_registry_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_05_metrics
+          description: Populate metrics registry
+          depends_on:
+            - sql_04_relationships
+          sql_task:
+            file_path: ../sql_semantic_poc/05_metrics_registry_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_06_synonyms
+          description: Populate synonyms registry
+          depends_on:
+            - sql_05_metrics
+          sql_task:
+            file_path: ../sql_semantic_poc/06_synonyms_registry_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_07_views
+          description: Build semantic views
+          depends_on:
+            - sql_06_synonyms
+          sql_task:
+            file_path: ../sql_semantic_poc/07_semantic_views_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_08_permissions
+          description: Apply PoC governance
+          depends_on:
+            - sql_07_views
+          sql_task:
+            file_path: ../sql_semantic_poc/08_permissions_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_09_validation
+          description: Run PoC validation suite
+          depends_on:
+            - sql_08_permissions
+          sql_task:
+            file_path: ../sql_semantic_poc/09_validation_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
+        - task_key: notebook_benchmarks
+          description: Execute benchmark questions notebook
+          depends_on:
+            - sql_09_validation
+          notebook_task:
+            notebook_path: ../notebooks/Benchmark_Questions.sql
+            source: GIT
+            run_as:
+              user_name: ${workspace.current_user.user_name}
+          new_cluster:
+            spark_version: 13.3.x-scala2.12
+            node_type_id: Standard_DS3_v2
+            autoscale:
+              min_workers: 1
+              max_workers: 1
+
+artifacts:
+  - files:
+      - ../sql_semantic_poc/01_schemas_semantic_poc.sql
+      - ../sql_semantic_poc/02_gold_tables_semantic_poc.sql
+      - ../sql_semantic_poc/03_seed_data_semantic_poc.sql
+      - ../sql_semantic_poc/04_relationship_registry_semantic_poc.sql
+      - ../sql_semantic_poc/05_metrics_registry_semantic_poc.sql
+      - ../sql_semantic_poc/06_synonyms_registry_semantic_poc.sql
+      - ../sql_semantic_poc/07_semantic_views_semantic_poc.sql
+      - ../sql_semantic_poc/08_permissions_semantic_poc.sql
+      - ../sql_semantic_poc/09_validation_semantic_poc.sql
+      - ../notebooks/Benchmark_Questions.sql
+      - ../tests/metadata_gap_report.sql
+      - ../docs/SQL_RUNBOOK.md
+      - ../docs/DAB_FLOW.md

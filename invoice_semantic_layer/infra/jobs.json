@@ -1,0 +1,44 @@
+﻿{
+  "name": "Invoice Analytics Semantic Validation",
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "nightly_validation_sql",
+      "description": "Run metadata and metric validations",
+      "sql_task": {
+        "file": "../sql/09_validation.sql",
+        "warehouse_name": "serverless_sql_wh"
+      },
+      "schedule": {
+        "quartz_cron_expression": "0 0 5 * * ?",
+        "timezone_id": "UTC",
+        "pause_status": "UNPAUSED"
+      },
+      "timeout_seconds": 1800,
+      "email_notifications": {
+        "on_failure": [
+          "finops@databricks.com"
+        ]
+      }
+    },
+    {
+      "task_key": "benchmark_genie_space",
+      "description": "Execute Genie benchmark notebook",
+      "depends_on": [
+        {
+          "task_key": "nightly_validation_sql"
+        }
+      ],
+      "notebook_task": {
+        "notebook_path": "/Repos/${workspace.current_user.user_name}/invoice-analytics/notebooks/Benchmark_Questions",
+        "source": "GIT"
+      },
+      "new_cluster": {
+        "spark_version": "13.3.x-scala2.12",
+        "node_type_id": "Standard_DS3_v2",
+        "num_workers": 1
+      },
+      "timeout_seconds": 1800
+    }
+  ]
+}
