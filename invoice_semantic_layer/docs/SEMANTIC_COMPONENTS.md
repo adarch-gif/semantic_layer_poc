@@ -1,14 +1,5 @@
 ﻿# Semantic Layer Component Deep Dive
 
-## Improved Prompt
-Provide an in-depth explanation of the semantic artifacts (relationship registry, metrics registry, synonyms registry, and `v_invoice_*` semantic views) used in the Databricks invoice analytics semantic schema that:
-1. Describes the purpose of each component, the information stored, and how Genie uses it.
-2. Explains why each artifact is required, what happens if it is missing, and how it supports trustworthy analytics.
-3. Walks through how data flows from gold tables into these components and ultimately into Genie and analysts.
-4. Includes a detailed Mermaid diagram to visualise component interactions and dependencies.
-5. Answers whether the solution could work without semantic views, and documents the trade-offs.
-6. Provides guidance for implementing, validating, and maintaining each artifact.
-
 ## 1. Big Picture
 The semantic schema acts as the contract between curated Delta tables and Genie. The relationship, metrics, and synonyms registries give Genie the context it needs to translate natural language into SQL. The `v_invoice_*` views present a business-friendly projection of the star schema so analysts and Genie operate on clean, consistent data.
 
@@ -124,3 +115,4 @@ graph TD
 - [ ] Communicate artefact ownership for ongoing maintenance.
 
 By maintaining these semantic components, the team ensures Genie can translate business questions into accurate SQL while keeping governance and documentation intact.
+
