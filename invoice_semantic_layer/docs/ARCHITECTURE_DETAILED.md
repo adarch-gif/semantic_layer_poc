@@ -1,13 +1,5 @@
 ﻿# Semantic Layer Architecture - Detailed Playbook
 
-## Improved Prompt
-Create a comprehensive architecture playbook for the Databricks invoice analytics semantic layer that:
-1. Documents every technical and business requirement with explicit ownership and justification.
-2. Describes each architectural component, how it interacts with the rest of the stack, and the controls that guard data quality.
-3. Presents multiple visuals (layered architecture, data flow, deployment flowchart, Genie sequence, responsibility swimlane, execution matrix diagram) to make the process easy to follow.
-4. Breaks the build-out into numbered steps, mapping actions to personas, inputs, outputs, and success criteria.
-5. Addresses dependencies, operational risks, and future enhancements so the solution stays resilient as scope grows.
-
 ## 1. Context & Goals
 - **Business Goal**: Deliver accurate invoice analytics to restaurant, sourcing, and finance stakeholders via Genie with minimal onboarding.
 - **Technical Goal**: Provide a governed semantic layer over curated Delta tables using Unity Catalog, ensuring consistent joins, metrics, and NLQ vocabulary.
@@ -312,3 +304,4 @@ Why: Maintain health]:::platform
 - Immediate next steps: run validation suite, configure Genie, schedule monitoring jobs.
 
 This playbook provides the operational blueprint for building, governing, and evolving the invoice analytics semantic layer on Databricks.
+
