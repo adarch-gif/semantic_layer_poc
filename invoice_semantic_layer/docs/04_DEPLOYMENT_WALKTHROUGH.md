@@ -99,7 +99,7 @@ This guide explains every step required to stand up the invoice analytics semant
 
 ---
 
-## 12. Genie Setup: `/docs/08_GENIE_SPACE_SETUP.md`
+## 12. Genie Setup: `/docs/07_GENIE_SPACE_SETUP.md`
 - **What happens**: Walks through the Genie UI to trust the semantic views, recreate relationships/metrics/synonyms, and activate benchmarks. Includes API placeholders for future automation.
 - **Why**: Bridges the SQL assets with Genie so analysts have an intuitive chat interface. Ensures only curated artifacts are exposed.
 - **When**: Once all SQL and validation steps succeed.

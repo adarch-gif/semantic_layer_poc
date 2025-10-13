@@ -5,17 +5,16 @@ This guide explains how to deploy and demo the invoice analytics semantic layer 
 
 ## 2. Environment Configuration
 ## 2a. Document Map
-1. [01_PREREQUISITES.md](../docs/01_PREREQUISITES.md) – Intake questions and readiness checklist.
-2. [02_ARCHITECTURE_OVERVIEW.md](../docs/02_ARCHITECTURE_OVERVIEW.md) – High-level architecture summary.
-3. [03_ARCHITECTURE_DETAILED.md](../docs/03_ARCHITECTURE_DETAILED.md) – Detailed playbook with diagrams/personas.
-4. [04_SEMANTIC_COMPONENTS.md](../docs/04_SEMANTIC_COMPONENTS.md) – Explanation of registries and semantic views.
-5. [05_DEPLOYMENT_WALKTHROUGH.md](../docs/05_DEPLOYMENT_WALKTHROUGH.md) – Narrative walkthrough of SQL scripts.
-6. [06_DEPLOYMENT_FLOW_DETAILS.md](../docs/06_DEPLOYMENT_FLOW_DETAILS.md) – Flowchart and step-by-step deployment detail.
-7. [07_SQL_RUNBOOK.md](../docs/07_SQL_RUNBOOK.md) – Script-level explanations, tables/views, and NLQ prompts.
-8. [08_GENIE_SPACE_SETUP.md](../docs/08_GENIE_SPACE_SETUP.md) – Genie Space configuration steps.
-9. [09_DAB_FLOW.md](../docs/09_DAB_FLOW.md) – Asset Bundle automation flow.
-10. [10_PRESENTATION_DECK.md](../docs/10_PRESENTATION_DECK.md) - Slide outline and stakeholder talking points.
-11. [11_DAB_DEPLOYMENT_README.md](../docs/11_DAB_DEPLOYMENT_README.md) - Detailed steps for running the bundle.
+1. [01_ARCHITECTURE_OVERVIEW.md](../docs/01_ARCHITECTURE_OVERVIEW.md) - High-level architecture summary.
+2. [02_ARCHITECTURE_DETAILED.md](../docs/02_ARCHITECTURE_DETAILED.md) - Detailed playbook with diagrams/personas.
+3. [03_SEMANTIC_COMPONENTS.md](../docs/03_SEMANTIC_COMPONENTS.md) - Explanation of registries and semantic views.
+4. [04_DEPLOYMENT_WALKTHROUGH.md](../docs/04_DEPLOYMENT_WALKTHROUGH.md) - Narrative walkthrough of SQL scripts.
+5. [05_DEPLOYMENT_FLOW_DETAILS.md](../docs/05_DEPLOYMENT_FLOW_DETAILS.md) - Flowchart and step-by-step deployment detail.
+6. [06_SQL_RUNBOOK.md](../docs/06_SQL_RUNBOOK.md) - Script-level explanations, tables/views, and NLQ prompts.
+7. [07_GENIE_SPACE_SETUP.md](../docs/07_GENIE_SPACE_SETUP.md) - Genie Space configuration steps.
+8. [08_DAB_FLOW.md](../docs/08_DAB_FLOW.md) - Asset Bundle automation flow.
+9. [09_PRESENTATION_DECK.md](../docs/09_PRESENTATION_DECK.md) - Slide outline and stakeholder talking points.
+10. [10_DAB_DEPLOYMENT_README.md](../docs/10_DAB_DEPLOYMENT_README.md) - Detailed steps for running the bundle.
 - **Catalog**: `cfascdodev_primary`
 - **Gold schema**: `invoice_gold_semantic_poc`
 - **Semantic schema**: `invoice_semantic_poc`
@@ -110,7 +109,7 @@ Use these in Genie to showcase NLQ accuracy:
 3. Configure benchmarks from the notebook for regression testing.
 4. Grant analysts access once validation succeeds.
 
-Refer to `docs/08_GENIE_SPACE_SETUP.md` for detailed UI steps.
+Refer to `docs/07_GENIE_SPACE_SETUP.md` for detailed UI steps.
 
 ## 9. Operations & Governance
 - Rerun validation whenever models or documentation change.
@@ -119,11 +118,11 @@ Refer to `docs/08_GENIE_SPACE_SETUP.md` for detailed UI steps.
 - Use the DAB pipeline for repeatable promotions across environments.
 
 ## 10. Supporting Documents
-- `docs/07_SQL_RUNBOOK.md` – Deep dive into SQL script behavior and NLQ question rationale.
-- `docs/09_DAB_FLOW.md` – How the Asset Bundle configuration works.
-- `docs/01_PREREQUISITES.md` – Intake checklist before starting the semantic layer project.
-- `docs/04_SEMANTIC_COMPONENTS.md` – Relationship/metrics/synonyms semantics overview.
-
+## 10. Supporting Documents
+- `docs/06_SQL_RUNBOOK.md` - Deep dive into SQL script behavior and NLQ question rationale.
+- `docs/03_SEMANTIC_COMPONENTS.md` - Relationship/metrics/synonyms semantics overview.
+- `docs/04_DEPLOYMENT_WALKTHROUGH.md` - Narrative walkthrough of each SQL script.
+- `docs/08_DAB_FLOW.md` - How the Asset Bundle configuration works.
 ## 11. Next Steps
 - Swap seed data with production ETL once ready.
 - Automate Genie configuration when APIs become available.

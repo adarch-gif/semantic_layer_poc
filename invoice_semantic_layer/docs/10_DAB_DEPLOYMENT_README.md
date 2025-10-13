@@ -80,9 +80,9 @@ Use the helper notebooks in `notebooks/`:
 - **Bundle path**: if repo path differs, adjust `bundle_dir` (widgets or CLI working directory).
 
 ## 10. Related Documentation
-- [05_DEPLOYMENT_WALKTHROUGH.md](../docs/05_DEPLOYMENT_WALKTHROUGH.md)
-- [09_DAB_FLOW.md](../docs/09_DAB_FLOW.md)
-- [07_SQL_RUNBOOK.md](../docs/07_SQL_RUNBOOK.md)
-- [08_GENIE_SPACE_SETUP.md](../docs/08_GENIE_SPACE_SETUP.md)
+- [04_DEPLOYMENT_WALKTHROUGH.md](../docs/04_DEPLOYMENT_WALKTHROUGH.md)
+- [08_DAB_FLOW.md](../docs/08_DAB_FLOW.md)
+- [06_SQL_RUNBOOK.md](../docs/06_SQL_RUNBOOK.md)
+- [07_GENIE_SPACE_SETUP.md](../docs/07_GENIE_SPACE_SETUP.md)
 
 This README can be handed directly to stakeholders who prefer configuration-driven deployment over individual SQL scripts.
