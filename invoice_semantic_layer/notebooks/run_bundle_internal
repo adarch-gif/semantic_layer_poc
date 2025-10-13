@@ -1,0 +1,18 @@
+dbutils.widgets.text("bundle_dir", "")
+dbutils.widgets.text("catalog", "")
+dbutils.widgets.text("schema_gold", "")
+dbutils.widgets.text("schema_sem", "")
+dbutils.widgets.text("warehouse_name", "")
+
+bundle_dir = dbutils.widgets.get("bundle_dir")
+catalog = dbutils.widgets.get("catalog")
+schema_gold = dbutils.widgets.get("schema_gold")
+schema_sem = dbutils.widgets.get("schema_sem")
+warehouse_name = dbutils.widgets.get("warehouse_name")
+
+def run_cli(cmd):
+    print(f"%sh {cmd}")
+    result = dbutils.notebook.run("/Workspace/Repos/<you>/invoice_semantic_layer/notebooks/sh_run", 3600, {"cmd": cmd})
+    print(result)
+
+# Notebook to run shell code with rich output
