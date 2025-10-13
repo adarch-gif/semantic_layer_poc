@@ -1,0 +1,5 @@
+dbutils.widgets.text("cmd", "")
+cmd = dbutils.widgets.get("cmd")
+result = dbutils.fs.put("temp.sh", cmd, True)  # optional logging
+print(dbutils.fs.head("temp.sh"))
+dbutils.notebook.exit(dbutils.shell(cmd))
