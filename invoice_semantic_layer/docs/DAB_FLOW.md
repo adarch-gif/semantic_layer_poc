@@ -1,8 +1,5 @@
 ﻿# Databricks Asset Bundle (DAB) Flow – Semantic PoC
 
-## Improved Prompt
-Explain how to run the existing `infra/databricks.yml`, describe how it changes the semantic layer deployment approach, and document the step-by-step behavior of the configuration.
-
 ## How to Run the Bundle
 1. Install/upgrade the Databricks CLI (v0.205+):
    ```bash
@@ -82,3 +79,4 @@ databricks bundle deploy --var catalog=cfascdodev_primary --var schema_gold=invo
 - Ensure your account has MANAGE/OFFERS privileges to run these steps (especially for the permissions task).
 
 By moving to this configuration-driven deployment, manual SQL execution is replaced with a controlled, repeatable pipeline that can be promoted across environments and integrated into CI/CD.
+
