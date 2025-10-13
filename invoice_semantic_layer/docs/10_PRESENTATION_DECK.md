@@ -80,7 +80,7 @@
 
 ### Slide 12 – Prerequisites & Stakeholder Responsibilities
 - **Content**:
-  - Summary from `PREREQUISITES.md` – data readiness, governance approvals, KPI catalogue, synonyms, warehouse readiness.
+  - Summary from `01_PREREQUISITES.md` – data readiness, governance approvals, KPI catalogue, synonyms, warehouse readiness.
   - Table mapping domain → key question → owner → artefact.
   - Call to action: confirm readiness date.
 

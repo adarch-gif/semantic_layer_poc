@@ -1,3 +1,3 @@
-﻿# Invoice Analytics Semantic PoC
+﻿# Invoice Analytics Semantic PoC Documentation
 
-This short file points to the consolidated deployment guide in `docs/README.md`. Use that document for the most up-to-date environment setup, deployment instructions, object summaries, validation steps, and Genie demo questions.
+Use [README.md](../docs/README.md) for the full deployment and demo guide. It includes environment setup, document map, execution options, Genie instructions, and operations guidance.

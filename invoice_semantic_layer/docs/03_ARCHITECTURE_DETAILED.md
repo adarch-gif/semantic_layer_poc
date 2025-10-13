@@ -236,7 +236,7 @@ Why: Verify Genie accuracy]:::analyticsEngineer
 
   Step13[Step 13: Configure Genie Space
 Inputs: Setup guide
-Action: Apply GENIE_SPACE_SETUP.md
+Action: Apply 08_GENIE_SPACE_SETUP.md
 Outputs: Published Space
 Why: Enable analysts]:::analyticsEngineer
 
@@ -271,7 +271,7 @@ Why: Maintain health]:::platform
 |10 | Test cases | Run `09_validation.sql` | Validation results | Confirms comments, joins, metrics | Platform Admin |
 |11 | Documentation checklist | Run `metadata_gap_report.sql` | Gap report | Identifies missing comments or synonyms | Governance Lead |
 |12 | NLQ scenarios | Run `Benchmark_Questions.sql` | Benchmark outputs | Validates Genie response quality | Analytics Engineer |
-|13 | Space setup guide | Follow `GENIE_SPACE_SETUP.md` | Genie Space configured | Makes semantic layer available | Analytics Engineer |
+|13 | Space setup guide | Follow `08_GENIE_SPACE_SETUP.md` | Genie Space configured | Makes semantic layer available | Analytics Engineer |
 |14 | DAB config | Deploy `databricks.yml` | Automated pipeline | Repeatable deployment | Platform Admin |
 |15 | Jobs config | Deploy `jobs.json` | Scheduled validation | Continuous monitoring | Platform Admin |
 
@@ -298,7 +298,7 @@ Why: Maintain health]:::platform
 - Observability dashboards showing validation history and comment coverage trends.
 
 ## 13. Reference Documents & Next Actions
-- Quick view: `ARCHITECTURE_OVERVIEW.md`
+- Quick view: `02_ARCHITECTURE_OVERVIEW.md`
 - Step-by-step operations: `DEPLOYMENT_WALKTHROUGH.md`
 - Execution order: `RUN_BOOK.md`
 - Immediate next steps: run validation suite, configure Genie, schedule monitoring jobs.

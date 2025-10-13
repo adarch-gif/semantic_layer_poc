@@ -4,6 +4,17 @@
 This guide explains how to deploy and demo the invoice analytics semantic layer proof-of-concept on Databricks. It consolidates the SQL scripts, automation options, tables/views, NLQ questions for Genie, and operational steps you need to showcase the semantic layer end-to-end.
 
 ## 2. Environment Configuration
+## 2a. Document Map
+1. [01_PREREQUISITES.md](../docs/01_PREREQUISITES.md) – Intake questions and readiness checklist.
+2. [02_ARCHITECTURE_OVERVIEW.md](../docs/02_ARCHITECTURE_OVERVIEW.md) – High-level architecture summary.
+3. [03_ARCHITECTURE_DETAILED.md](../docs/03_ARCHITECTURE_DETAILED.md) – Detailed playbook with diagrams/personas.
+4. [04_SEMANTIC_COMPONENTS.md](../docs/04_SEMANTIC_COMPONENTS.md) – Explanation of registries and semantic views.
+5. [05_DEPLOYMENT_WALKTHROUGH.md](../docs/05_DEPLOYMENT_WALKTHROUGH.md) – Narrative walkthrough of SQL scripts.
+6. [06_DEPLOYMENT_FLOW_DETAILS.md](../docs/06_DEPLOYMENT_FLOW_DETAILS.md) – Flowchart and step-by-step deployment detail.
+7. [07_SQL_RUNBOOK.md](../docs/07_SQL_RUNBOOK.md) – Script-level explanations, tables/views, and NLQ prompts.
+8. [08_GENIE_SPACE_SETUP.md](../docs/08_GENIE_SPACE_SETUP.md) – Genie Space configuration steps.
+9. [09_DAB_FLOW.md](../docs/09_DAB_FLOW.md) – Asset Bundle automation flow.
+10. [10_PRESENTATION_DECK.md](../docs/10_PRESENTATION_DECK.md) – Slide outline and stakeholder talking points.
 - **Catalog**: `cfascdodev_primary`
 - **Gold schema**: `invoice_gold_semantic_poc`
 - **Semantic schema**: `invoice_semantic_poc`
@@ -98,7 +109,7 @@ Use these in Genie to showcase NLQ accuracy:
 3. Configure benchmarks from the notebook for regression testing.
 4. Grant analysts access once validation succeeds.
 
-Refer to `docs/GENIE_SPACE_SETUP.md` for detailed UI steps.
+Refer to `docs/08_GENIE_SPACE_SETUP.md` for detailed UI steps.
 
 ## 9. Operations & Governance
 - Rerun validation whenever models or documentation change.
@@ -107,10 +118,10 @@ Refer to `docs/GENIE_SPACE_SETUP.md` for detailed UI steps.
 - Use the DAB pipeline for repeatable promotions across environments.
 
 ## 10. Supporting Documents
-- `docs/SQL_RUNBOOK.md` – Deep dive into SQL script behavior and NLQ question rationale.
-- `docs/DAB_FLOW.md` – How the Asset Bundle configuration works.
-- `docs/PREREQUISITES.md` – Intake checklist before starting the semantic layer project.
-- `docs/SEMANTIC_COMPONENTS.md` – Relationship/metrics/synonyms semantics overview.
+- `docs/07_SQL_RUNBOOK.md` – Deep dive into SQL script behavior and NLQ question rationale.
+- `docs/09_DAB_FLOW.md` – How the Asset Bundle configuration works.
+- `docs/01_PREREQUISITES.md` – Intake checklist before starting the semantic layer project.
+- `docs/04_SEMANTIC_COMPONENTS.md` – Relationship/metrics/synonyms semantics overview.
 
 ## 11. Next Steps
 - Swap seed data with production ETL once ready.
