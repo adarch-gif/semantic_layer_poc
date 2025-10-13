@@ -13,50 +13,50 @@ The semantic layer relies on trusted gold data, documented business definitions,
 ## 3. Detailed Prerequisites
 
 ### 3.1 Data Readiness
-| # | Question | What “Yes” Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
+| # | Question | What "Yes" Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
 |---|----------|------------------------|----------------|------------------------|------------------|-------------------|
-| D1 | Which upstream systems supply invoices, suppliers, restaurants, distribution centers, and items? | We have an inventory of source systems, owners, refresh cadences, and data contracts. | Defines ingestion scope and helps align transformations with source nuances. | Missing feeds lead to incomplete facts/dims, breaking joins and creating gaps in Genie. | Data Engineer, Source System Owners | Source system registry, lineage diagram, ingestion architecture deck |
-| D2 | Are gold fact and dimension tables modeled, populated, and validated? | Star schema tables exist in `${SCHEMA_GOLD}`, with QA sign-off on counts, null checks, and key coverage. | Semantic views assume gold tables are accurate; otherwise the semantic layer amplifies errors. | Analysts see incorrect spend numbers; validations and benchmarks fail. | Data Engineer | Data model ERD, QA results, unit test notebook |
-| D3 | How are slowly changing dimensions handled (type, effective dating, default end dates)? | Documented SCD strategy with examples; effective_from/effective_to semantics agreed. | Ensures historical analysis from Genie matches finance reporting and avoids double-counting. | Point-in-time questions return inconsistent answers, damaging trust. | Data Engineer, Analytics Engineer | Dimension design docs, sample queries showing SCD behavior |
-| D4 | Are critical reference datasets (currency codes, regions, etc.) standardized? | Reference tables exist and align with corporate standards. | Prevents mismatched labels across joins and ensures filters behave correctly. | Users see duplicate categories or mis-aggregations in Genie outputs. | Data Engineer | Reference data spec, validation queries |
+| D1 | Which upstream systems supply invoices, suppliers, restaurants, distribution centers, and items? | Inventory of source systems, owners, refresh cadences, and data contracts. | Defines ingestion scope and aligns transformations with source nuances. | Missing feeds create fact/dim gaps and broken joins. | Data Engineer, Source System Owners | Source system registry, lineage diagram, ingestion design |
+| D2 | Are gold fact and dimension tables modeled, populated, and validated? | Star-schema tables live in `invoice_gold_semantic_poc` with QA sign-off on counts, null checks, key coverage. | Semantic views assume gold tables are correct; otherwise errors propagate. | Analysts receive wrong spend numbers; validation/benchmarks fail. | Data Engineer | ERD, QA results, unit test notebook |
+| D3 | How are slowly changing dimensions handled (type, effective dating)? | Documented SCD strategy with effective_from/effective_to rules. | Ensures historical analysis matches finance reporting. | Point-in-time questions give inconsistent answers, eroding trust. | Data Engineer, Analytics Engineer | Dimension design doc, example queries |
+| D4 | Are reference datasets (currency codes, regions) standardized? | Reference tables align with corporate standards. | Prevents mismatched labels and ensures filters behave correctly. | Duplicate categories or mis-aggregations in Genie outputs. | Data Engineer | Reference data spec, validation queries |
 
 ### 3.2 Governance & Access
-| # | Question | What “Yes” Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
+| # | Question | What "Yes" Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
 |---|----------|------------------------|----------------|------------------------|------------------|-------------------|
-| G1 | Which catalog and schemas will host gold and semantic assets? | Catalog `cfa_demo` & schemas `gold`, `semantic_analytics` approved with ownership assignments. | Needed for scripts, grants, and automation variables. | Deployments fail or land in uncontrolled namespaces. | Platform Admin | Unity Catalog governance document, RBAC matrix |
-| G2 | Who authorizes access for `${GROUP_ANALYSTS}` and other consumers? | Governance lead approves analyst group membership and roles. | Ensures compliance with data policies before enabling Genie. | Unauthorized access or audit findings. | Governance Lead | Access request approvals, security ticket |
-| G3 | What documentation/comment coverage standard applies (>=95%)? | The team agrees to maintain comments on tables/columns and knows validation thresholds. | Validation scripts enforce documentation; clarity avoids last-minute failures. | Automated validation fails, delaying releases. | Governance Lead, Data Engineer | Documentation policy, comment templates |
-| G4 | Are there data retention or masking requirements for invoice data? | Compliance team confirms masking or retention rules and how they apply to semantic views. | Ensures PII/compliance obligations are met before exposure to analysts. | Potential policy violations or rework to retro-fit masking. | Governance Lead, Legal/Compliance | Data classification report, masking strategy |
+| G1 | Which catalog and schemas host gold vs semantic assets? | Catalog `cfascdodev_primary` with schemas `invoice_gold_semantic_poc` and `invoice_semantic_poc` approved and owned. | Needed for scripts, grants, automation variables. | Deployments fail or land in uncontrolled namespaces. | Platform Admin | UC governance plan, RBAC matrix |
+| G2 | Who authorizes analyst access? | Governance lead approves membership (e.g., `account users` or target group). | Ensures compliance before enabling Genie. | Unauthorized access or audit findings. | Governance Lead | Access approvals, ticket records |
+| G3 | What comment/documentation standard applies (>=95%)? | Team commits to comment coverage and knows validation thresholds. | Validation enforces documentation; clarity prevents last-minute failures. | Automated validation fails, delaying releases. | Governance Lead, Data Engineer | Documentation policy, comment templates |
+| G4 | Any data retention/masking requirements? | Compliance confirms masking/retention and how semantic views handle it. | Ensures PII/compliance obligations before exposure. | Violations or rework to retrofit masking. | Governance Lead, Legal | Data classification report, masking strategy |
 
 ### 3.3 Business Semantics & Metrics
-| # | Question | What “Yes” Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
+| # | Question | What "Yes" Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
 |---|----------|------------------------|----------------|------------------------|------------------|-------------------|
-| B1 | What KPIs are in scope (invoice_amount, total_spend, avg_price, etc.)? | KPI catalogue lists definitions, formulas, owners, and tags. | Feeds the metrics registry and aligns with finance expectations. | Conflicting numbers between Genie and dashboards; lack of ownership. | Analytics Engineer, Finance | KPI dictionary, finance reporting deck |
-| B2 | Are there agreed business rules for discounts, freight, tax allocations? | Documented logic (e.g., positive discount means reduction) reviewed with finance/logistics. | Ensures semantic views calculate measures consistent with business reporting. | Metrics are misinterpreted, leading to escalations from users. | Analytics Engineer, Finance, Logistics | Business rule document, sample calculations |
-| B3 | What synonyms/vocabulary do analysts use (store, supplier, DC, spend, etc.)? | Synonym glossary mapping business terms to canonical names validated with end users. | Enables accurate NLQ mapping in Genie and reduces training overhead. | Genie misinterprets prompts, reducing adoption and trust. | Analytics Engineer, Analyst SMEs | Vocabulary workshop notes, glossary spreadsheet |
-| B4 | Which fact-to-dimension joins are trusted and under what confidence? | Relationship matrix with join type, confidence scores, and known caveats. | Populates relationship registry and guides Genie join logic. | Genie may use incorrect joins, producing wrong answers. | Analytics Engineer, Data Engineer | Join validation notebook, data quality reports |
+| B1 | What KPIs are in scope? | KPI catalogue with definitions, formulas, owners, tags. | Feeds metrics registry; aligns with finance expectations. | Conflicting numbers between Genie and dashboards. | Analytics Engineer, Finance | KPI dictionary, reporting deck |
+| B2 | Agreed business rules for discounts, freight, tax allocations? | Documented logic reviewed by finance/logistics. | Ensures semantic views reflect business reporting. | Misinterpretation leads to escalations. | Analytics Engineer, Finance | Business rule doc, sample calculations |
+| B3 | Vocabulary/synonyms analysts use? | Glossary mapping terms (e.g., store, spend) to canonical names. | Enables accurate NLQ mapping in Genie. | Genie misinterprets prompts, reducing adoption. | Analytics Engineer, Analyst SMEs | Vocabulary workshop notes |
+| B4 | Trusted fact-to-dimension joins with confidence? | Relationship matrix with join type, confidence, caveats. | Populates relationship registry and guides Genie joins. | Genie uses unsafe joins, producing wrong answers. | Analytics Engineer, Data Engineer | Join validation notebook |
 
 ### 3.4 Platform & Operational Readiness
-| # | Question | What “Yes” Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
+| # | Question | What "Yes" Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
 |---|----------|------------------------|----------------|------------------------|------------------|-------------------|
-| P1 | Is the target SQL warehouse (`serverless_sql_wh`) provisioned with required permissions? | Warehouse exists, is accessible by deployment principals, and sized for validation workloads. | All SQL scripts and Genie rely on this warehouse. | Deployment scripts fail; Genie cannot run queries. | Platform Admin | Warehouse config screenshot, access test results |
-| P2 | Are Databricks Asset Bundles and repos enabled? | Workspace allows DAB deployment and repo integration. | CI/CD automation in `databricks.yml` depends on these features. | Manual execution increases risk of errors. | Platform Admin | Workspace capability checklist, test deployment |
-| P3 | Who owns ongoing job execution and incident response? | On-call rotation or owner defined; runbooks and alert destinations documented. | Validation job needs active monitoring to maintain trust. | Failures go unnoticed; issues reach analysts before fixes. | Platform Admin, Operations | Runbook, escalation matrix |
-| P4 | Are environment promotion paths (dev/test/prod) established? | Strategy defined for how assets move between environments, including data refresh cadence. | Supports safe rollouts and testing before production. | Direct prod changes risk outages and misconfigurations. | Platform Admin, Governance Lead | Environment strategy doc, pipeline diagram |
+| P1 | Is the target SQL warehouse provisioned? | Warehouse (e.g., `General Purpose`) accessible to deployment principal and sized appropriately. | All SQL scripts and Genie rely on it. | Deployment fails; Genie cannot run queries. | Platform Admin | Warehouse config screenshot, access test |
+| P2 | Are Databricks Asset Bundles/repos enabled? | Workspace supports DAB and repos. | `databricks.yml` pipeline depends on it. | Manual execution increases risk. | Platform Admin | Workspace capability checklist |
+| P3 | Who owns job execution/incident response? | On-call rotation/runbook defined for nightly validation job. | Maintains trust post go-live. | Failures go unnoticed; analysts see stale data. | Platform Admin, Operations | Runbook, escalation matrix |
+| P4 | Promotion paths defined (dev/test/prod)? | Strategy for moving bundles between environments. | Supports safe rollouts. | Direct prod edits risk outages. | Platform Admin, Governance Lead | Environment strategy diagram |
 
 ### 3.5 Data Quality & Validation
-| # | Question | What validation thresholds and KPIs define success? | What “Yes” Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
+| # | Question | What "Yes" Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
 |---|----------|------------------------|----------------|------------------------|------------------|-------------------|
-| Q1 | Comment coverage threshold (>=95%) agreed? | Stakeholders approve threshold and remediation plan when below target. | Aligns with `/sql/09_validation.sql` PASS/FAIL logic. | Disagreements on "done" definition cause release delays. | Governance Lead | QA policy, validation checklist |
-| Q2 | Metric reconciliation rules accepted? | Finance signs off that total_spend equals net_line + freight + tax, etc. | Validation queries confirm core financial logic before release. | Unvetted logic may pass validation but fail business checks later. | Finance, Analytics Engineer | Reconciliation spec, sample results |
-| Q3 | Genie benchmark questions approved? | Benchmark set (15-20 questions) with expected SQL/answers endorsed by business. | Enables `/notebooks/Benchmark_Questions.sql` to certify NLQ readiness. | No baseline for Genie regression testing; adoption suffers. | Analytics Engineer, Business Stakeholders | Benchmark acceptance sheet |
+| Q1 | Are comment coverage thresholds documented (>=95%)? | Agreed threshold and remediation steps when below target. | Aligns with `09_validation_semantic_poc.sql` PASS/FAIL. | Disputes over "done" cause delays. | Governance Lead | QA policy, validation checklist |
+| Q2 | Metric reconciliation rules accepted? | Finance confirms invoice_amount formula (net + freight + tax - discount). | Validation confirms financial logic before release. | Unvetted logic may slip past validation and be rejected later. | Finance, Analytics Engineer | Reconciliation spec, sample results |
+| Q3 | Genie benchmark questions approved? | Business endorses benchmark prompts and expected answers. | `/notebooks/Benchmark_Questions.sql` certifies NLQ readiness. | NLQ reliability can’t be proven; adoption suffers. | Analytics Engineer, Business Stakeholders | Benchmark acceptance sheet |
 
 ### 3.6 Change Management & Communication
-| # | Question | What “Yes” Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
+| # | Question | What "Yes" Looks Like | Why It Matters | Consequence if Ignored | Primary Owner(s) | Example Artefacts |
 |---|----------|------------------------|----------------|------------------------|------------------|-------------------|
-| C1 | What is the change request process for metrics/synonyms/permissions? | Documented workflow (e.g., JIRA, CAB) with SLAs and approvers. | Maintains governance after go-live and ensures registries stay accurate. | Ad-hoc changes break automation, leading to inconsistent results. | Governance Lead | Change management SOP |
-| C2 | How will analysts be onboarded to Genie and semantic views? | Training plan or documentation prepared, including runbooks and FAQ. | Drives adoption and reduces support overhead. | Users may misuse assets or revert to manual workarounds. | Analytics Enablement Lead | Training deck, onboarding checklist |
-| C3 | Where will artefacts live (KPI catalogue, policies, validation logs)? | Central repository (Confluence, SharePoint, repo docs) with access controls. | Provides traceability and quick reference during audits. | Knowledge becomes siloed or lost; onboarding new members is slow. | Governance Lead, Platform Admin | Documentation site, repo README |
+| C1 | Change request process for metrics/synonyms/permissions? | Documented workflow (tickets, CAB) with SLAs and approvers. | Maintains governance after go-live. | Ad-hoc changes break automation. | Governance Lead | Change management SOP |
+| C2 | Analyst onboarding to Genie/semantic views? | Training plan, FAQ, runbooks prepared. | Drives adoption and reduces support load. | Users revert to manual workarounds. | Analytics Enablement Lead | Training deck, onboarding checklist |
+| C3 | Where do artefacts live? | Central repository (Confluence, SharePoint, repo docs) with access controls. | Supports audits and onboarding. | Knowledge silos; ramp-up slows. | Governance Lead, Platform Admin | Documentation portal |
 
 ## 4. Visual – Prerequisite Intake Flow (Expanded)
 ```mermaid
@@ -109,16 +109,15 @@ graph TD
 ```
 
 ## 5. Intake Workshop Facilitation Tips
-- Schedule a 60-90 minute session with cross-functional stakeholders.
-- Review prerequisites in advance and ask owners to bring artefacts (documents, screenshots, query results).
-- Log decisions and gaps in a shared tracker; include due dates.
-- If disagreements arise (e.g., metric definition), note them as blockers and assign follow-up sessions.
-- Once all prerequisites show "Yes" with evidence, document the decision and notify leadership that semantic layer engineering can proceed.
+- Schedule a 60–90 minute session with cross-functional stakeholders.
+- Ask owners to bring artefacts (documents, screenshots, query results).
+- Log decisions/gaps in a shared tracker with due dates.
+- Treat disagreements (e.g., metric definitions) as blockers with follow-up sessions.
+- When everything shows “Yes,” document the decision and notify leadership that the build can start.
 
 ## 6. Ongoing Maintenance
-- Revisit this checklist whenever new data sources or metrics are added.
-- Include prerequisite review in quarterly governance meetings to ensure artefacts remain current.
-- Embed the checklist in onboarding for new team members working on semantic layer evolution.
+- Revisit checklist when new data sources/metrics are added.
+- Include prerequisite review in quarterly governance meetings.
+- Use this checklist during onboarding for new team members.
 
-This playbook equips teams with a detailed, self-explanatory prerequisite framework to launch the semantic layer confidently and keep it governed over time.
-
+This playbook gives stakeholders a clear, well-formatted prerequisite checklist before launching the semantic layer PoC.
