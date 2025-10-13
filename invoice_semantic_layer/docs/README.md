@@ -14,7 +14,8 @@ This guide explains how to deploy and demo the invoice analytics semantic layer 
 7. [07_SQL_RUNBOOK.md](../docs/07_SQL_RUNBOOK.md) – Script-level explanations, tables/views, and NLQ prompts.
 8. [08_GENIE_SPACE_SETUP.md](../docs/08_GENIE_SPACE_SETUP.md) – Genie Space configuration steps.
 9. [09_DAB_FLOW.md](../docs/09_DAB_FLOW.md) – Asset Bundle automation flow.
-10. [10_PRESENTATION_DECK.md](../docs/10_PRESENTATION_DECK.md) – Slide outline and stakeholder talking points.
+10. [10_PRESENTATION_DECK.md](../docs/10_PRESENTATION_DECK.md) - Slide outline and stakeholder talking points.
+11. [11_DAB_DEPLOYMENT_README.md](../docs/11_DAB_DEPLOYMENT_README.md) - Detailed steps for running the bundle.
 - **Catalog**: `cfascdodev_primary`
 - **Gold schema**: `invoice_gold_semantic_poc`
 - **Semantic schema**: `invoice_semantic_poc`
