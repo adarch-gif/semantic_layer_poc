@@ -1,5 +1,14 @@
 ﻿# Semantic Layer Prerequisites Playbook
 
+## Improved Prompt
+Create an expanded, self-explanatory prerequisite playbook for the Databricks invoice analytics semantic layer that:
+1. Lists every question we must answer before engineering starts, with clear definitions of what “answered” means.
+2. Explains why each prerequisite matters, what outcomes we expect, who owns it, and what happens if we skip it.
+3. Provides example artefacts or data sources that satisfy each prerequisite and outlines how to verify them quickly.
+4. Groups prerequisites into thematic sections (data, governance, business semantics, platform/operations, data quality, change management) for stakeholder alignment.
+5. Includes a visual (Mermaid) communicating how unmet prerequisites block the kickoff decision and where remediation loops feed back.
+6. Offers facilitation guidance so teams can run an intake workshop and capture answers efficiently.
+
 ## 1. Purpose
 The semantic layer relies on trusted gold data, documented business definitions, and operating controls. This playbook ensures everyone understands the questions to resolve, why they matter, and how to validate readiness.
 
@@ -121,4 +130,3 @@ graph TD
 - Embed the checklist in onboarding for new team members working on semantic layer evolution.
 
 This playbook equips teams with a detailed, self-explanatory prerequisite framework to launch the semantic layer confidently and keep it governed over time.
-

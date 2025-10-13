@@ -1,5 +1,14 @@
 ﻿# Semantic Layer Deployment Flow – Detailed Guide
 
+## Improved Prompt
+Deliver a comprehensive guide for the semantic layer deployment flow that:
+1. Explains the purpose of each step (environment validation through operational monitoring) and why it must occur in order.
+2. Describes prerequisites, inputs, outputs, and what could fail if a step is skipped.
+3. Connects each step to the required artifacts (schemas, registries, views, validations, Genie configuration, CI/CD jobs).
+4. Includes a stakeholder-ready visual (Mermaid flowchart) that captures dependencies, decision gates, and feedback loops.
+5. Provides talking points for stakeholders: what we need from them, how they can verify completion, and what assurances each step gives.
+6. Highlights alternative scenarios (e.g., what happens if we defer benchmarks or skip registries) to explain trade-offs.
+
 ## 1. Flow Diagram
 ```mermaid
 graph TD
@@ -180,4 +189,3 @@ For each step, communicate:
 - [ ] Operational ownership (on-call rota, alert channels) established.
 
 This guide equips you to walk stakeholders through the deployment visual, answer "why", "what if we skip", and "what do you need from me" for every step, ensuring a transparent, reliable semantic layer rollout.
-

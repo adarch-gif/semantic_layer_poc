@@ -1,5 +1,8 @@
 ﻿# Semantic PoC SQL Runbook
 
+## Improved Prompt
+Document a stakeholder-ready explanation of each semantic PoC SQL script, detailing purpose, prerequisites, execution order, objects created, and downstream impact, so the team can articulate the overall flow end-to-end.
+
 ## Environment Overview
 - **Catalog**: `cfascdodev_primary`
 - **Gold schema**: `invoice_gold_semantic_poc`
@@ -144,4 +147,3 @@ This runbook can accompany the scripts during walkthroughs to explain what each 
 - Analysts are granted SELECT on only these views (via `08_permissions_semantic_poc.sql`), ensuring governance.
 - Metric and synonym registries reference column names exposed by these views, enabling accurate join paths and vocabulary mapping.
 - Validation script queries these views to confirm metric reconciliation and sample outputs.
-

@@ -1,5 +1,13 @@
 ﻿# Semantic Layer Presentation Deck
 
+## Improved Prompt
+Prepare a client-ready presentation deck outline for the Databricks invoice analytics semantic layer that:
+1. Articulates the business challenge, proposed architecture, and benefits in executive-friendly language.
+2. Walks through the semantic components (registries, views, governance, Genie) and why each is necessary.
+3. Summarises deployment milestones, prerequisites, and operational model.
+4. Provides slide-by-slide talking points, recommended visuals, and any supporting data.
+5. Identifies follow-up actions, ownership, and timeline suggestions.
+
 ## Audience
 - Executive sponsors (Finance, Operations, Analytics)
 - Data engineering and governance stakeholders
@@ -127,4 +135,3 @@
 4. Set up communication channel for ongoing updates.
 
 Use this outline to build the slide deck (PowerPoint, Google Slides, or Databricks Notebook presentation). Each slide already includes suggested visuals and talking points to keep the narrative consistent.
-
