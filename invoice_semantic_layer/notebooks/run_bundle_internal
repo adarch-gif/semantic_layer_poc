@@ -1,18 +1,29 @@
-dbutils.widgets.text("bundle_dir", "")
-dbutils.widgets.text("catalog", "")
-dbutils.widgets.text("schema_gold", "")
-dbutils.widgets.text("schema_sem", "")
-dbutils.widgets.text("warehouse_name", "")
+﻿# Databricks notebook source
+
+# COMMAND ----------
+import textwrap
 
 bundle_dir = dbutils.widgets.get("bundle_dir")
 catalog = dbutils.widgets.get("catalog")
 schema_gold = dbutils.widgets.get("schema_gold")
 schema_sem = dbutils.widgets.get("schema_sem")
-warehouse_name = dbutils.widgets.get("warehouse_name")
+warehouse = dbutils.widgets.get("warehouse_name")
 
-def run_cli(cmd):
-    print(f"%sh {cmd}")
-    result = dbutils.notebook.run("/Workspace/Repos/<you>/invoice_semantic_layer/notebooks/sh_run", 3600, {"cmd": cmd})
-    print(result)
+commands = [
+    f"cd '{bundle_dir}' && databricks bundle validate",
+    textwrap.dedent(f"""
+        cd '{bundle_dir}' && databricks bundle deploy \
+          --var catalog={catalog} \
+          --var schema_gold={schema_gold} \
+          --var schema_sem={schema_sem} \
+          --var warehouse_name=\"{warehouse}\"
+    """).strip(),
+    f"cd '{bundle_dir}' && databricks bundle run semantic_layer_deploy"
+]
 
-# Notebook to run shell code with rich output
+for cmd in commands:
+    print(f"Executing: {cmd}")
+    output = dbutils.notebook.run("./sh_run", 3600, {"cmd": cmd})
+    print(output)
+
+print("Databricks bundle execution complete.")

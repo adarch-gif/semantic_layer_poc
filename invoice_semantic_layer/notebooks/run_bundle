@@ -1,18 +1,32 @@
-dbutils.widgets.text("bundle_dir", "")
-dbutils.widgets.text("catalog", "")
-dbutils.widgets.text("schema_gold", "")
-dbutils.widgets.text("schema_sem", "")
-dbutils.widgets.text("warehouse_name", "")
+﻿# Databricks notebook source
 
-bundle_dir = dbutils.widgets.get("bundle_dir")
-catalog = dbutils.widgets.get("catalog")
-schema_gold = dbutils.widgets.get("schema_gold")
-schema_sem = dbutils.widgets.get("schema_sem")
-warehouse_name = dbutils.widgets.get("warehouse_name")
+# COMMAND ----------
 
-def run_cli(cmd):
-    print(f"%sh {cmd}")
-    result = dbutils.notebook.run("/Workspace/Users/apurva.doshi1@accesscfa.com/semantic_layer_poc/invoice_semantic_layer/notebooks/sh_run", 3600, {"cmd": cmd})
-    print(result)
 
-# Notebook to run shell code with rich output
+ctx = dbutils.notebook.entry_point.getDbutils().notebook().getContext()
+notebook_path = ctx.notebookPath().get()
+path_parts = notebook_path.split("/")
+repo_root = "/".join(path_parts[:-2])  # remove /notebooks/<file>
+default_bundle_dir = f"{repo_root}/infra"
+
+# Widgets (users can override values before running)
+dbutils.widgets.text("bundle_dir", default_bundle_dir, "Bundle Directory")
+dbutils.widgets.text("catalog", "cfascdodev_primary", "Catalog")
+dbutils.widgets.text("schema_gold", "invoice_gold_semantic_poc", "Gold Schema")
+dbutils.widgets.text("schema_sem", "invoice_semantic_poc", "Semantic Schema")
+dbutils.widgets.text("warehouse_name", "General Purpose", "SQL Warehouse")
+
+task_params = {
+    "bundle_dir": dbutils.widgets.get("bundle_dir"),
+    "catalog": dbutils.widgets.get("catalog"),
+    "schema_gold": dbutils.widgets.get("schema_gold"),
+    "schema_sem": dbutils.widgets.get("schema_sem"),
+    "warehouse_name": dbutils.widgets.get("warehouse_name")
+}
+
+print("Running Databricks Asset Bundle with parameters:")
+for key, value in task_params.items():
+    print(f"  {key}: {value}")
+
+result = dbutils.notebook.run("./run_bundle_internal", 3600, task_params)
+print(result)

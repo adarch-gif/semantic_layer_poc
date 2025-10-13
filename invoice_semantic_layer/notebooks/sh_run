@@ -1,5 +1,15 @@
-dbutils.widgets.text("cmd", "")
+﻿# Databricks notebook source
+
+# COMMAND ----------
+import uuid
+
 cmd = dbutils.widgets.get("cmd")
-result = dbutils.fs.put("temp.sh", cmd, True)  # optional logging
-print(dbutils.fs.head("temp.sh"))
-dbutils.notebook.exit(dbutils.shell(cmd))
+if not cmd:
+    dbutils.notebook.exit("No command supplied")
+
+tmp_path = f"/tmp/bundle_cmd_{uuid.uuid4().hex}.sh"
+dbutils.fs.put(tmp_path, cmd, True)
+print(dbutils.fs.head(tmp_path))
+result = dbutils.shell(cmd)
+dbutils.fs.rm(tmp_path)
+dbutils.notebook.exit(result)
