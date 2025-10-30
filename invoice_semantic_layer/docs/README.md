@@ -1,4 +1,4 @@
-ï»¿# Invoice Analytics Semantic PoC â€“ Deployment Guide
+# Invoice Analytics Semantic PoC – Deployment Guide
 
 ## 1. Purpose
 This guide explains how to deploy and demo the invoice analytics semantic layer proof-of-concept on Databricks. It consolidates the SQL scripts, automation options, tables/views, NLQ questions for Genie, and operational steps you need to showcase the semantic layer end-to-end.
@@ -56,15 +56,15 @@ Run the scripts in `sql_semantic_poc/` sequentially (Databricks SQL editor or `%
 
 ## 4. Objects Created
 ### 4.1 Delta Tables
-- `cfascdodev_primary.invoice_gold_semantic_poc.fact_invoice_line_semantic_poc` â€“ invoice line fact with spend measures.
-- `cfascdodev_primary.invoice_gold_semantic_poc.dim_supplier_semantic_poc` â€“ supplier attributes and status.
-- `cfascdodev_primary.invoice_gold_semantic_poc.dim_item_semantic_poc` â€“ item/product dimension (category, UOM, brand).
-- `cfascdodev_primary.invoice_gold_semantic_poc.dim_restaurant_semantic_poc` â€“ restaurant locations, region, timezone, active flag.
-- `cfascdodev_primary.invoice_gold_semantic_poc.dim_dc_semantic_poc` â€“ distribution centers with regions and status.
-- `cfascdodev_primary.invoice_gold_semantic_poc.dim_date_semantic_poc` â€“ calendar/fiscal date attributes.
-- `cfascdodev_primary.invoice_semantic_poc.relationships_semantic_poc` â€“ fact-to-dimension join registry.
-- `cfascdodev_primary.invoice_semantic_poc.metrics_semantic_poc` â€“ KPI definitions and expressions.
-- `cfascdodev_primary.invoice_semantic_poc.synonyms_semantic_poc` â€“ business vocabulary mappings for Genie.
+- `cfascdodev_primary.invoice_gold_semantic_poc.fact_invoice_line_semantic_poc` – invoice line fact with spend measures.
+- `cfascdodev_primary.invoice_gold_semantic_poc.dim_supplier_semantic_poc` – supplier attributes and status.
+- `cfascdodev_primary.invoice_gold_semantic_poc.dim_item_semantic_poc` – item/product dimension (category, UOM, brand).
+- `cfascdodev_primary.invoice_gold_semantic_poc.dim_restaurant_semantic_poc` – restaurant locations, region, timezone, active flag.
+- `cfascdodev_primary.invoice_gold_semantic_poc.dim_dc_semantic_poc` – distribution centers with regions and status.
+- `cfascdodev_primary.invoice_gold_semantic_poc.dim_date_semantic_poc` – calendar/fiscal date attributes.
+- `cfascdodev_primary.invoice_semantic_poc.relationships_semantic_poc` – fact-to-dimension join registry.
+- `cfascdodev_primary.invoice_semantic_poc.metrics_semantic_poc` – KPI definitions and expressions.
+- `cfascdodev_primary.invoice_semantic_poc.synonyms_semantic_poc` – business vocabulary mappings for Genie.
 
 ### 4.2 Semantic Views
 | View | Source Tables | Highlights | Usage |
@@ -95,9 +95,9 @@ Run the scripts in `sql_semantic_poc/` sequentially (Databricks SQL editor or `%
 - 4 invoice dates (2024-01-05 to 2024-01-08) with corresponding fact rows
 
 ## 6. Validation & Benchmarks
-- `09_validation_semantic_poc.sql` â€“ enforces â‰¥95% comment coverage, checks join reachability, reconciles spend metrics, and outputs sample aggregates.
-- `notebooks/Benchmark_Questions.sql` â€“ 18 reference queries for Genie NLQ regression; run after each deployment.
-- `tests/metadata_gap_report.sql` â€“ highlights missing comments or synonyms (now hard-coded to the PoC catalog/schemas).
+- `09_validation_semantic_poc.sql` – enforces =95% comment coverage, checks join reachability, reconciles spend metrics, and outputs sample aggregates.
+- `notebooks/Benchmark_Questions.sql` – 18 reference queries for Genie NLQ regression; run after each deployment.
+- `tests/metadata_gap_report.sql` – highlights missing comments or synonyms (now hard-coded to the PoC catalog/schemas).
 
 ## 7. Genie NLQ Demo Questions
 Use these in Genie to showcase NLQ accuracy:
@@ -142,3 +142,4 @@ Refer to `docs/07_GENIE_SPACE_SETUP.md` for detailed UI steps.
 - Automate Genie configuration when APIs become available.
 - Extend the validation suite with additional data-quality checks.
 - Add alerting for validation/benchmark failures in production environments.
+

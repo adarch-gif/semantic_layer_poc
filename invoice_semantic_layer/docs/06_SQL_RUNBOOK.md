@@ -58,6 +58,7 @@ Run the SQL scripts in numeric order; each builds on the previous. After initial
 - **Features**: Declares standard measures (spend, quantity, freight, tax, discount, line counts), dimensions, and `TIMESTAMP invoice_date` for time-based slicing.
 - **Why**: Enables stakeholders to build Metrics dashboards without writing SQL. Requires the Databricks Metrics (Preview) feature to be enabled in the workspace.
 - **Note**: Although numbered `10_`, this script must execute immediately after `07_semantic_views_semantic_poc.sql` because it depends on the semantic views before permissions tighten access.
+- **Authoring reference**: See `docs/12_METRIC_VIEWS_YAML_GUIDE.md` for YAML examples, migration steps, and governance guidelines.
 
 ### 08_permissions_semantic_poc.sql – Apply Governance
 - **Goal**: Grant access to semantic assets while shielding gold tables.
