@@ -13,8 +13,8 @@ This guide explains how to deploy and demo the invoice analytics semantic layer 
 6. [06_SQL_RUNBOOK.md](../docs/06_SQL_RUNBOOK.md) - Script-level explanations, tables/views, and NLQ prompts.
 7. [07_GENIE_SPACE_SETUP.md](../docs/07_GENIE_SPACE_SETUP.md) - Genie Space configuration steps.
 8. [08_DAB_FLOW.md](../docs/08_DAB_FLOW.md) - Asset Bundle automation flow.
-9. [10_DAB_DEPLOYMENT_README.md](../docs/10_DAB_DEPLOYMENT_README.md) - Detailed steps for running the bundle.
-10. [11_UI_DEPLOYMENT_README.md](../docs/11_UI_DEPLOYMENT_README.md) - Run the PoC via the Databricks UI.
+9. [09_DAB_DEPLOYMENT_README.md](../docs/09_DAB_DEPLOYMENT_README.md) - Detailed steps for running the bundle.
+10. [10_UI_DEPLOYMENT_README.md](../docs/10_UI_DEPLOYMENT_README.md) - Run the PoC via the Databricks UI.
 - **Catalog**: `cfascdodev_primary`
 - **Gold schema**: `invoice_gold_semantic_poc`
 - **Semantic schema**: `invoice_semantic_poc`

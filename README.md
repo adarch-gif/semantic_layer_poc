@@ -5,8 +5,8 @@ All project assets live under invoice_semantic_layer/. Start with the documentat
 Recommended reading:
 1. [invoice_semantic_layer/docs/README.md](invoice_semantic_layer/docs/README.md) - master deployment guide and document map.
 2. [invoice_semantic_layer/docs/01_ARCHITECTURE_OVERVIEW.md](invoice_semantic_layer/docs/01_ARCHITECTURE_OVERVIEW.md) - high-level architecture summary.
-3. [invoice_semantic_layer/docs/10_DAB_DEPLOYMENT_README.md](invoice_semantic_layer/docs/10_DAB_DEPLOYMENT_README.md) - step-by-step instructions for executing infra/databricks.yml.
-4. [invoice_semantic_layer/docs/11_UI_DEPLOYMENT_README.md](invoice_semantic_layer/docs/11_UI_DEPLOYMENT_README.md) - how to run the PoC directly from the Databricks UI.
+3. [invoice_semantic_layer/docs/09_DAB_DEPLOYMENT_README.md](invoice_semantic_layer/docs/09_DAB_DEPLOYMENT_README.md) - step-by-step instructions for executing infra/databricks.yml.
+4. [invoice_semantic_layer/docs/10_UI_DEPLOYMENT_README.md](invoice_semantic_layer/docs/10_UI_DEPLOYMENT_README.md) - how to run the PoC directly from the Databricks UI.
 
 For a quick run:
 - SQL scripts: invoice_semantic_layer/sql_semantic_poc/
