@@ -7,6 +7,7 @@ Recommended reading:
 2. [invoice_semantic_layer/docs/01_ARCHITECTURE_OVERVIEW.md](invoice_semantic_layer/docs/01_ARCHITECTURE_OVERVIEW.md) - high-level architecture summary.
 3. [invoice_semantic_layer/docs/09_DAB_DEPLOYMENT_README.md](invoice_semantic_layer/docs/09_DAB_DEPLOYMENT_README.md) - step-by-step instructions for executing infra/databricks.yml.
 4. [invoice_semantic_layer/docs/10_UI_DEPLOYMENT_README.md](invoice_semantic_layer/docs/10_UI_DEPLOYMENT_README.md) - how to run the PoC directly from the Databricks UI.
+5. [invoice_semantic_layer/docs/12_METRIC_VIEWS_YAML_GUIDE.md](invoice_semantic_layer/docs/12_METRIC_VIEWS_YAML_GUIDE.md) - YAML metric view authoring and migration handbook.
 
 For a quick run:
 - SQL scripts: invoice_semantic_layer/sql_semantic_poc/

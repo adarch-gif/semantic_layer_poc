@@ -6,3 +6,4 @@
 4. Execute `/notebooks/Benchmark_Questions.sql` to confirm benchmark answers and populate Genie.
 5. Configure the Genie Space using `/docs/GENIE_SPACE_SETUP.md` and grant `${GROUP_ANALYSTS}` access.
 6. Deploy CI/CD automation via `/infra/databricks.yml`, then schedule `/infra/jobs.json` for ongoing validation.
+> Need help authoring or updating metric views? See `/docs/12_METRIC_VIEWS_YAML_GUIDE.md` before modifying `/sql/10_metric_views.sql`.
