@@ -64,11 +64,29 @@ $$;
 6. Execute `sql_semantic_poc/09_validation_semantic_poc.sql` and `notebooks/Benchmark_Questions.sql`.
 7. Update documentation (runbook, deployment guides) to note YAML usage.
 
-## 5. YAML Templates for the PoC
+## 5. Workflow Overview
+1. **Build semantic views** (`07_semantic_views_semantic_poc.sql`) so every perspective has a curated source.
+2. **Author YAML metric views** inside `sql_semantic_poc/10_metric_views_semantic_poc.sql`.
+3. **Deploy** using the Databricks Asset Bundle (`sql_10_metric_views` task) or manual execution.
+4. **Apply permissions** (`08_permissions_semantic_poc.sql`) to expose metric views and shield gold tables.
+5. **Validate** (`09_validation_semantic_poc.sql`) and **benchmark** (`notebooks/Benchmark_Questions.sql`) for accuracy.
+6. **Consume** via Databricks Metrics UI, SQL clients, or Genie.
+
+```mermaid
+flowchart TD
+  A[Gold Tables + Registries<br/>Scripts 01-06] --> B[Semantic Views<br/>07_semantic_views]
+  B --> C[Metric Views (YAML)<br/>10_metric_views]
+  C --> D[Permissions<br/>08_permissions]
+  D --> E[Validation & Benchmarks<br/>09_validation + Notebook]
+  C --> F[Databricks Metrics UI]
+  B --> G[Genie / NLQ]
+```
+
+## 6. YAML Templates for the PoC
 
 Replace the contents of `sql_semantic_poc/10_metric_views_semantic_poc.sql` with the YAML definitions below. They mirror the earlier SQL metric views but include structured metadata.
 
-### 5.1 Supplier Metrics
+### 6.1 Supplier Metrics
 ```
 CREATE OR REPLACE VIEW `cfascdodev_primary`.`invoice_semantic_poc`.mv_invoice_supplier_semantic_poc
 WITH METRICS
@@ -114,7 +132,7 @@ tags:
 $$;
 ```
 
-### 5.2 Item Metrics
+### 6.2 Item Metrics
 ```
 CREATE OR REPLACE VIEW `cfascdodev_primary`.`invoice_semantic_poc`.mv_invoice_item_semantic_poc
 WITH METRICS
@@ -157,7 +175,7 @@ measures:
 $$;
 ```
 
-### 5.3 Restaurant Metrics
+### 6.3 Restaurant Metrics
 ```
 CREATE OR REPLACE VIEW `cfascdodev_primary`.`invoice_semantic_poc`.mv_invoice_restaurant_semantic_poc
 WITH METRICS
@@ -200,7 +218,7 @@ measures:
 $$;
 ```
 
-### 5.4 Distribution Center Metrics
+### 6.4 Distribution Center Metrics
 ```
 CREATE OR REPLACE VIEW `cfascdodev_primary`.`invoice_semantic_poc`.mv_invoice_dc_semantic_poc
 WITH METRICS
@@ -243,7 +261,7 @@ measures:
 $$;
 ```
 
-### 5.5 Calendar Metrics
+### 6.5 Calendar Metrics
 ```
 CREATE OR REPLACE VIEW `cfascdodev_primary`.`invoice_semantic_poc`.mv_invoice_calendar_semantic_poc
 WITH METRICS
@@ -292,27 +310,29 @@ measures:
 $$;
 ```
 
-## 6. Deployment Workflow
+## 7. Deployment Workflow
 1. Update the SQL script with YAML definitions.
 2. Deploy via the Databricks Asset Bundle (`databricks bundle run semantic_layer_deploy`) or run manually.
 3. Validate with `09_validation_semantic_poc.sql` and `Benchmark_Questions.sql`.
 4. Review the metric views in the Metrics UI under `Catalog ? Schema ? Metric Views`.
 5. Commit the SQL and documentation changes to version control.
 
-## 7. Governance & Validation
+## 8. Governance & Validation
 - **Permissions**: `GRANT SELECT` on the metric view is required for analysts. Existing governance script covers this.
 - **Documentation**: Keep metric descriptions in YAML comments in sync with `metrics_semantic_poc`.
 - **Validation**: Extend the validation script if new measures or filters are introduced.
 - **Change management**: Use pull requests, DAB deployments, and the runbook to coordinate releases.
 
-## 8. Troubleshooting
+## 9. Troubleshooting
 - **YAML parse error**: Check indentation (two spaces) and quote expressions containing colons.
 - **Metric view missing in UI**: Ensure Metrics (Preview) is enabled and you granted access.
 - **Unexpected aggregations**: Confirm each measure uses `SUM(...)`, `COUNT(...)`, etc. YAML expressions should contain the aggregation directly.
 - **Need multiple time dimensions**: Use `timestamp:` for the default, and add additional time expressions under `dimensions`.
 
-## 9. Next Steps
+## 10. Next Steps
 1. Migrate any remaining SQL-style metric views to YAML using this guide.
 2. Add `owners` and `tags` metadata to improve discoverability.
 3. Automate metric view creation through CI/CD using templates or parameterised YAML.
 4. Socialise this guide with stakeholders so everyone understands how the semantic metric layer is governed.
+
+
