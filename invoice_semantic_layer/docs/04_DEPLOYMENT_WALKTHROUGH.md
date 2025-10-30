@@ -68,14 +68,22 @@ This guide explains every step required to stand up the invoice analytics semant
 
 ---
 
-## 8. Permissions: `/sql/08_permissions.sql`
+## 8. Metric Views: `/sql/10_metric_views.sql`
+- **What happens**: Creates five metric views (`mv_invoice_supplier`, `mv_invoice_item`, `mv_invoice_restaurant`, `mv_invoice_dc`, `mv_invoice_calendar`) on top of the semantic views with predefined measures, dimensions, and a `TIMESTAMP invoice_date`.
+- **Why**: Exposes curated spend metrics directly to Databricks Metrics so stakeholders can build scorecards without SQL. Measures include spend, quantity, freight, tax, discounts, and line counts.
+- **When**: Immediately after semantic views are built; run it before permissions so the bundle can grant access to metric views alongside semantic views.
+- **Prerequisite**: Databricks Metrics must be enabled in the workspace (Preview). Once enabled, the metric views appear under the semantic schema in the Metrics browser.
+
+---
+
+## 9. Permissions: `/sql/08_permissions.sql`
 - **What happens**: Grants catalog/schema usage and view-level SELECT to `${GROUP_ANALYSTS}` while explicitly revoking gold-layer access (both current and future tables).
 - **Why**: Enforces governance by forcing analysts through semantic assets. Ensures data consumers see only approved views, matching Genie exposure.
 - **When**: After the views are created to immediately lock down access.
 
 ---
 
-## 9. Validation: `/sql/09_validation.sql`
+## 10. Validation: `/sql/09_validation.sql`
 - **What happens**:
   1. Calculates column and table comment coverage, ensuring ≥95%.
   2. Confirms every relationship in the registry can successfully join (non-zero row counts).
@@ -85,56 +93,56 @@ This guide explains every step required to stand up the invoice analytics semant
 
 ---
 
-## 10. Metadata Gap Audit: `/tests/metadata_gap_report.sql`
+## 11. Metadata Gap Audit: `/tests/metadata_gap_report.sql`
 - **What happens**: Reports any table columns missing comments or synonyms, and metrics lacking synonym coverage.
 - **Why**: Complements validation by pointing out remaining documentation tasks. Useful during development or governance reviews.
 - **When**: After initial deployment and during maintenance cycles.
 
 ---
 
-## 11. Benchmark Notebook: `/notebooks/Benchmark_Questions.sql`
+## 12. Benchmark Notebook: `/notebooks/Benchmark_Questions.sql`
 - **What happens**: Provides 18 "golden" questions with expected SQL/answer shapes to exercise Genie. It selects from semantic views only.
 - **Why**: Serves as regression tests for NLQ behavior. Analysts and data engineers can confirm Genie understands the model and returns accurate results.
 - **When**: Run after validation; also whenever metrics or synonyms change.
 
 ---
 
-## 12. Genie Setup: `/docs/07_GENIE_SPACE_SETUP.md`
+## 13. Genie Setup: `/docs/07_GENIE_SPACE_SETUP.md`
 - **What happens**: Walks through the Genie UI to trust the semantic views, recreate relationships/metrics/synonyms, and activate benchmarks. Includes API placeholders for future automation.
 - **Why**: Bridges the SQL assets with Genie so analysts have an intuitive chat interface. Ensures only curated artifacts are exposed.
 - **When**: Once all SQL and validation steps succeed.
 
 ---
 
-## 13. Run Book: `RUN_BOOK.md`
+## 14. Run Book: `RUN_BOOK.md`
 - **What happens**: Summarizes the execution order in six concise steps (SQL sequence, validation, metadata audit, benchmarks, Genie configuration, CI/CD).
 - **Why**: Quick reference for operators who need a checklist without reading full documentation.
 - **When**: Use anytime you need a refresher on the execution order.
 
 ---
 
-## 14. CI/CD Automation: `/infra/databricks.yml`
+## 15. CI/CD Automation: `/infra/databricks.yml`
 - **What happens**: Defines a Databricks Asset Bundle job that executes the SQL scripts in order, runs validations, and executes the benchmark notebook on a lightweight cluster.
 - **Why**: Enables repeatable deployments across environments (dev/test/prod) with a single command. Ensures validations gate the deployment.
 - **When**: After manual verification, integrate this bundle into your deployment pipeline (e.g., `databricks bundle deploy`).
 
 ---
 
-## 15. Scheduled Monitoring: `/infra/jobs.json`
+## 16. Scheduled Monitoring: `/infra/jobs.json`
 - **What happens**: Template for a Databricks Job that runs validation SQL nightly and the benchmark notebook afterward, with email alerts on failure.
 - **Why**: Keeps the semantic layer healthy by detecting regressions, comment gaps, or Genie drift automatically.
 - **When**: Once the solution is in production, schedule this job to catch issues proactively.
 
 ---
 
-## 16. Documentation Hub: `/docs/README.md`
+## 17. Documentation Hub: `/docs/README.md`
 - **What happens**: Provides a high-level overview, deployment order, validation instructions, Genie integration tips, CI/CD guidance, and future enhancements.
 - **Why**: Serves as the landing page for new contributors or auditors seeking context.
 - **When**: Share alongside the repository or bundle hand-off.
 
 ---
 
-## 17. Ongoing Operations
+## 18. Ongoing Operations
 - Re-run `/sql/09_validation.sql` and `/tests/metadata_gap_report.sql` after any schema or comment change.
 - Update registries (relationships, metrics, synonyms) as new business requirements emerge.
 - Refresh the benchmark notebook with additional questions when Genie usage expands.

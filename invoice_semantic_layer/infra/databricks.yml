@@ -64,10 +64,17 @@ resources:
           sql_task:
             file_path: ../sql_semantic_poc/07_semantic_views_semantic_poc.sql
             warehouse_name: ${vars.warehouse_name}
+        - task_key: sql_10_metric_views
+          description: Publish metric views for Databricks Metrics
+          depends_on:
+            - sql_07_views
+          sql_task:
+            file_path: ../sql_semantic_poc/10_metric_views_semantic_poc.sql
+            warehouse_name: ${vars.warehouse_name}
         - task_key: sql_08_permissions
           description: Apply PoC governance
           depends_on:
-            - sql_07_views
+            - sql_10_metric_views
           sql_task:
             file_path: ../sql_semantic_poc/08_permissions_semantic_poc.sql
             warehouse_name: ${vars.warehouse_name}
@@ -103,6 +110,7 @@ artifacts:
       - ../sql_semantic_poc/05_metrics_registry_semantic_poc.sql
       - ../sql_semantic_poc/06_synonyms_registry_semantic_poc.sql
       - ../sql_semantic_poc/07_semantic_views_semantic_poc.sql
+      - ../sql_semantic_poc/10_metric_views_semantic_poc.sql
       - ../sql_semantic_poc/08_permissions_semantic_poc.sql
       - ../sql_semantic_poc/09_validation_semantic_poc.sql
       - ../notebooks/Benchmark_Questions.sql

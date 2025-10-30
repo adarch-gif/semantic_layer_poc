@@ -23,6 +23,8 @@ Loads sample dataset]:::build
 Relationships, metrics, synonyms]:::build
   Views[Run 07_semantic_views.sql
 Publishes v_invoice_* views]:::build
+  MetricViews[Run 10_metric_views.sql
+Publishes mv_invoice_* metric views]:::build
   Permissions[Run 08_permissions.sql
 Grants semantic access, revokes gold]:::build
   Validation[Run 09_validation.sql
@@ -40,7 +42,7 @@ Nightly validation & benchmarks]:::operate
   Operate[Operate, monitor, improve
 Alert handling, enhancements]:::operate
 
-  Start --> Env --> Schemas --> GoldTables --> SeedData --> Registries --> Views --> Permissions --> Validation --> GapReport --> Benchmarks --> Genie --> DAB --> Jobs --> Operate
+  Start --> Env --> Schemas --> GoldTables --> SeedData --> Registries --> Views --> MetricViews --> Permissions --> Validation --> GapReport --> Benchmarks --> Genie --> DAB --> Jobs --> Operate
 ```
 
 ## 2. Step-by-Step Breakdown
@@ -86,56 +88,63 @@ Alert handling, enhancements]:::operate
 - **Stakeholder Ask**: Review view columns, naming conventions, computed measures.
 - **Risk if Skipped**: Users must join raw tables manually; access controls cannot differentiate; NLQ accuracy drops.
 
-### 2.7 Run 08_permissions.sql (Governance Controls)
+### 2.7 Run 10_metric_views.sql (Metric Views)
+- **What**: Build `mv_invoice_*` metric views on top of the semantic perspectives with standard measures (spend, quantity, freight, tax, discount, line count) and `TIMESTAMP invoice_date`.
+- **Why**: Unlocks Databricks Metrics so finance and operations teams can track KPIs without writing SQL; ensures consistent aggregations across dashboards.
+- **Prerequisites**: Semantic views deployed; Databricks Metrics (Preview) enabled in the workspace.
+- **Stakeholder Ask**: Confirm Metrics availability, validate measure definitions, prioritise which scorecards to publish.
+- **Risk if Skipped**: Metrics UI remains empty or inconsistent, forcing manual extracts or ad-hoc SQL for reporting.
+
+### 2.8 Run 08_permissions.sql (Governance Controls)
 - **What**: Grant analysts usage/select on semantic schema, revoke direct gold access.
 - **Why**: Enforces "semantic-only" access, reducing risk of misuse and ensuring consistent metrics.
 - **Prerequisites**: Previous steps completed, security approvals.
 - **Stakeholder Ask**: Confirm analyst group membership; review governance policy.
 - **Risk if Skipped**: Analysts may query raw tables, producing conflicting results or exposing sensitive data.
 
-### 2.8 Run 09_validation.sql (Quality Gate)
+### 2.9 Run 09_validation.sql (Quality Gate)
 - **What**: Checks comment coverage, join reachability, metric reconciliation, sample aggregates.
 - **Why**: Ensures documentation and logic meet standards before release.
 - **Prerequisites**: Views and registries in place.
 - **Stakeholder Ask**: Agree on pass/fail thresholds and review output.
 - **Risk if Skipped**: Undetected data model issues reach analysts; trust erodes.
 
-### 2.9 Run metadata_gap_report.sql (Documentation Audit)
+### 2.10 Run metadata_gap_report.sql (Documentation Audit)
 - **What**: Lists columns/metrics missing comments or synonyms.
 - **Why**: Helps maintain documentation hygiene; supports audits.
 - **Prerequisites**: Validation run, registries populated.
 - **Stakeholder Ask**: Assign owners to remediate gaps.
 - **Risk if Skipped**: Comment coverage may slip below policy; NLQ accuracy declines.
 
-### 2.10 Execute Benchmark_Questions.sql (NLQ Benchmarks)
+### 2.11 Execute Benchmark_Questions.sql (NLQ Benchmarks)
 - **What**: Runs curated queries to confirm Genie can answer key business questions.
 - **Why**: Acts as regression suite for natural-language performance.
 - **Prerequisites**: Views, metrics, synonyms ready; dataset loaded.
 - **Stakeholder Ask**: Approve expected answers; participate in review.
 - **Risk if Skipped**: Genie may ship with untested behaviour; analysts lose trust.
 
-### 2.11 Configure Genie Space (AI/BI Setup)
+### 2.12 Configure Genie Space (AI/BI Setup)
 - **What**: Trust semantic views, register metrics/synonyms/relationships, load benchmarks, set access.
 - **Why**: Connects the semantic layer to the analyst experience.
 - **Prerequisites**: Validations successful; governance approvals.
 - **Stakeholder Ask**: Provide workspace access, confirm trusted assets, approve space name/description.
 - **Risk if Skipped**: Genie cannot use the semantic layer; project value unrealised.
 
-### 2.12 Deploy databricks.yml (Automation)
+### 2.13 Deploy databricks.yml (Automation)
 - **What**: Use Databricks Asset Bundle to orchestrate SQL and validation steps in order.
 - **Why**: Enables repeatable deployments across environments; reduces manual error.
 - **Prerequisites**: DAB tooling enabled, repository connected.
 - **Stakeholder Ask**: Approve pipeline integration, provide service principals.
 - **Risk if Skipped**: Manual runs may diverge; difficult to promote to production.
 
-### 2.13 Schedule jobs.json (Nightly Monitoring)
+### 2.14 Schedule jobs.json (Nightly Monitoring)
 - **What**: Create Databricks job to rerun validation and benchmark notebook on schedule with alerts.
 - **Why**: Maintains trust after go-live; detects regressions quickly.
 - **Prerequisites**: DAB deployed or manual job creation allowed.
 - **Stakeholder Ask**: Provide alert recipients, SLA expectations.
 - **Risk if Skipped**: Issues go unnoticed until end users report them.
 
-### 2.14 Operate, Monitor, Improve (Continuous Improvement)
+### 2.15 Operate, Monitor, Improve (Continuous Improvement)
 - **What**: Review validation results, update registries/views, expand metrics, and remediate alerts.
 - **Why**: Keeps semantic layer accurate as business requirements evolve.
 - **Stakeholder Ask**: Participate in change management, provide feedback, approve new KPIs.
@@ -162,6 +171,7 @@ For each step, communicate:
 | 03_seed_data.sql | Seed values | Seed dataset |
 | Registries | KPI catalogue, join rules, glossary | Relationship/metrics/synonym rows |
 | 07_semantic_views.sql | Fact/dim tables, metrics expressions | Semantic views |
+| 10_metric_views.sql | Semantic views, metrics definitions | Metric views for Databricks Metrics |
 | 08_permissions.sql | Group definitions | Grants/revokes |
 | 09_validation.sql | Semantic views, registries | Validation report |
 | metadata_gap_report.sql | Metadata tables | Gap report |

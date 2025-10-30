@@ -96,14 +96,15 @@ flowchart TD
   F --> G[Run 05_metrics_registry.sql]
   G --> H[Run 06_synonyms_registry.sql]
   H --> I[Run 07_semantic_views.sql]
-  I --> J[Run 08_permissions.sql]
-  J --> K[Run 09_validation.sql]
-  K --> L[Run metadata_gap_report.sql]
-  L --> M[Execute Benchmark_Questions.sql]
-  M --> N[Configure Genie Space]
-  N --> O[Deploy databricks.yml]
-  O --> P[Schedule jobs.json]
-  P --> Q[Operate, monitor, improve]
+  I --> J[Run 10_metric_views.sql]
+  J --> K[Run 08_permissions.sql]
+  K --> L[Run 09_validation.sql]
+  L --> M[Run metadata_gap_report.sql]
+  M --> N[Execute Benchmark_Questions.sql]
+  N --> O[Configure Genie Space]
+  O --> P[Deploy databricks.yml]
+  P --> Q[Schedule jobs.json]
+  Q --> R[Operate, monitor, improve]
 ```
 
 ## 6. Visual - Genie Query Sequence
@@ -210,49 +211,55 @@ Action: Run 07_semantic_views.sql
 Outputs: Curated views
 Why: Expose friendly data]:::dataEngineer
 
-  Step9[Step 9: Apply permissions
+  Step9[Step 9: Publish metric views
+Inputs: Semantic views
+Action: Run 10_metric_views.sql
+Outputs: Metric views
+Why: Enable Databricks Metrics]:::dataEngineer
+
+  Step10[Step 10: Apply permissions
 Inputs: Access policy
 Action: Run 08_permissions.sql
 Outputs: Grants/revokes
 Why: Enforce governance]:::governance
 
-  Step10[Step 10: Validate model
+  Step11[Step 11: Validate model
 Inputs: Validation SQL
 Action: Run 09_validation.sql
 Outputs: Validation results
 Why: Ensure quality]:::platform
 
-  Step11[Step 11: Check metadata gaps
+  Step12[Step 12: Check metadata gaps
 Inputs: Gap report SQL
 Action: Run metadata_gap_report.sql
 Outputs: Gap list
 Why: Maintain documentation]:::governance
 
-  Step12[Step 12: Execute benchmarks
+  Step13[Step 13: Execute benchmarks
 Inputs: Benchmark notebook
 Action: Run Benchmark_Questions.sql
 Outputs: NLQ results
 Why: Verify Genie accuracy]:::analyticsEngineer
 
-  Step13[Step 13: Configure Genie Space
+  Step14[Step 14: Configure Genie Space
 Inputs: Setup guide
 Action: Apply 07_GENIE_SPACE_SETUP.md
 Outputs: Published Space
 Why: Enable analysts]:::analyticsEngineer
 
-  Step14[Step 14: Deploy DAB
+  Step15[Step 15: Deploy DAB
 Inputs: databricks.yml
 Action: Deploy bundle
 Outputs: Automated pipeline
 Why: Ensure repeatability]:::platform
 
-  Step15[Step 15: Schedule jobs
+  Step16[Step 16: Schedule jobs
 Inputs: jobs.json
 Action: Create job
 Outputs: Nightly monitoring
 Why: Maintain health]:::platform
 
-  Step1 --> Step2 --> Step3 --> Step4 --> Step5 --> Step6 --> Step7 --> Step8 --> Step9 --> Step10 --> Step11 --> Step12 --> Step13 --> Step14 --> Step15
+  Step1 --> Step2 --> Step3 --> Step4 --> Step5 --> Step6 --> Step7 --> Step8 --> Step9 --> Step10 --> Step11 --> Step12 --> Step13 --> Step14 --> Step15 --> Step16
 ```
 **Interpretation**: Each step node details inputs, actions, outputs, rationale, and highlights the responsible persona via color-coding.
 
@@ -267,13 +274,14 @@ Why: Maintain health]:::platform
 | 6 | Metric specs | Run `05_metrics_registry.sql` | Metrics registry rows | Standardises KPIs | Analytics Engineer |
 | 7 | Business vocabulary | Run `06_synonyms_registry.sql` | Synonym registry rows | Enhances NLQ accuracy | Analytics Engineer |
 | 8 | View design | Run `07_semantic_views.sql` | Business-friendly views | Shields analysts from raw tables | Data Engineer |
-| 9 | Access policy | Run `08_permissions.sql` | Grants and revokes applied | Enforces semantic-only access | Governance Lead |
-|10 | Test cases | Run `09_validation.sql` | Validation results | Confirms comments, joins, metrics | Platform Admin |
-|11 | Documentation checklist | Run `metadata_gap_report.sql` | Gap report | Identifies missing comments or synonyms | Governance Lead |
-|12 | NLQ scenarios | Run `Benchmark_Questions.sql` | Benchmark outputs | Validates Genie response quality | Analytics Engineer |
-|13 | Space setup guide | Follow `07_GENIE_SPACE_SETUP.md` | Genie Space configured | Makes semantic layer available | Analytics Engineer |
-|14 | DAB config | Deploy `databricks.yml` | Automated pipeline | Repeatable deployment | Platform Admin |
-|15 | Jobs config | Deploy `jobs.json` | Scheduled validation | Continuous monitoring | Platform Admin |
+| 9 | Metric view design | Run `10_metric_views.sql` | Metric views published | Enables Databricks Metrics dashboards | Data Engineer |
+|10 | Access policy | Run `08_permissions.sql` | Grants and revokes applied | Enforces semantic-only access | Governance Lead |
+|11 | Test cases | Run `09_validation.sql` | Validation results | Confirms comments, joins, metrics | Platform Admin |
+|12 | Documentation checklist | Run `metadata_gap_report.sql` | Gap report | Identifies missing comments or synonyms | Governance Lead |
+|13 | NLQ scenarios | Run `Benchmark_Questions.sql` | Benchmark outputs | Validates Genie response quality | Analytics Engineer |
+|14 | Space setup guide | Follow `07_GENIE_SPACE_SETUP.md` | Genie Space configured | Makes semantic layer available | Analytics Engineer |
+|15 | DAB config | Deploy `databricks.yml` | Automated pipeline | Repeatable deployment | Platform Admin |
+|16 | Jobs config | Deploy `jobs.json` | Scheduled validation | Continuous monitoring | Platform Admin |
 
 ## 10. Controls & Guardrails
 - Documentation: Comment coverage enforced via validation; gap report keeps metadata fresh.

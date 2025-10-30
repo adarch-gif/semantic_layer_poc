@@ -4,13 +4,14 @@
 Provide a detailed, step-by-step guide so stakeholders can deploy the semantic PoC using `infra/databricks.yml`—including prerequisites, CLI setup, override options, running from notebooks or Jobs, and validation of results.
 
 ## 1. Overview
-`infra/databricks.yml` is a Databricks Asset Bundle (DAB) configuration. When executed, it sequentially runs all PoC SQL scripts (schemas → tables → registries → views → permissions → validation) and then the benchmark notebook.
+`infra/databricks.yml` is a Databricks Asset Bundle (DAB) configuration. When executed, it sequentially runs all PoC SQL scripts (schemas → tables → registries → views → metric views → permissions → validation) and then the benchmark notebook.
 
 ## 2. Prerequisites
 - Databricks workspace with Unity Catalog enabled.
 - Access rights: ability to `MANAGE`/`OWN` catalog `cfascdodev_primary`, create schemas, and run Jobs.
 - Databricks SQL warehouse `General Purpose` (or override).
 - Databricks CLI v0.205+ installed and authenticated (`databricks auth login`).
+- Databricks Metrics (Preview) enabled in the workspace so metric views appear in the Metrics browser after deployment.
 - Repo `semantic_layer_poc` cloned locally or via workspace Git (paths in this guide assume local clone).
 
 ## 3. Directory Structure
@@ -65,7 +66,7 @@ Use the helper notebooks in `notebooks/`:
 4. Run the job to execute the bundle automatically.
 
 ## 7. Post-Deployment Validation
-- Check Job run: all tasks (schemas, tables, registries, views, permissions, validation, benchmark notebook) should succeed.
+- Check Job run: all tasks (schemas, tables, registries, views, metric views, permissions, validation, benchmark notebook) should succeed.
 - Review validation output in `sql_semantic_poc/09_validation_semantic_poc.sql` (stored in job logs) for PASS statuses.
 - Optional: rerun `notebooks/Benchmark_Questions.sql` to confirm NLQ answers against the PoC dataset.
 

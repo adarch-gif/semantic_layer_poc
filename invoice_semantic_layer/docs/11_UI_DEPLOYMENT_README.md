@@ -7,6 +7,7 @@ This guide explains how to deploy the semantic PoC entirely through the Databric
 - Permission to create Repos, run notebooks, and manage Jobs.
 - SQL warehouse `General Purpose` (or equivalent) available to your user.
 - Service principal or user with `MANAGE` (or `OWNERSHIP`) on the catalog so the permissions script can run.
+- Databricks Metrics (Preview) enabled if you plan to surface the new metric views inside the Metrics UI.
 
 ## 2. Import the Repository into Databricks Repos
 1. In the Databricks UI, open **Repos** → **Add Repo**.
@@ -40,6 +41,7 @@ The repo contains helper notebooks that execute `infra/databricks.yml` directly 
 ## 5. Verify the Deployment
 - Open **Workflows** → **Jobs**. You should see a job named **Invoice Analytics Semantic PoC Deploy** (created by the bundle). Check that the latest run succeeded.
 - In SQL Editor, verify that schemas `invoice_gold_semantic_poc` and `invoice_semantic_poc` now exist under catalog `cfascdodev_primary` with the expected tables and views.
+- If Databricks Metrics is enabled, open the Metrics UI and confirm the metric views `mv_invoice_*_semantic_poc` are available for building dashboards.
 - Optional: run `/Repos/<user>/semantic_layer_poc/invoice_semantic_layer/notebooks/Benchmark_Questions.sql` to validate Genie NLQ results.
 
 ## 6. Schedule via Databricks Jobs (Optional)

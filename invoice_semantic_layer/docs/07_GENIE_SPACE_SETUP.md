@@ -10,7 +10,7 @@ WAREHOUSE_NAME=serverless_sql_wh
 ```
 
 ## Prerequisites
-- Run SQL scripts `/sql/01_schemas.sql` through `/sql/08_permissions.sql` in order.
+- Run SQL scripts `/sql/01_schemas.sql` through `/sql/09_validation.sql`, inserting `/sql/10_metric_views.sql` immediately after `/sql/07_semantic_views.sql`.
 - Ensure `WAREHOUSE_NAME` points to an available SQL warehouse with access to `CATALOG`.
 
 ## Step-by-step Space Creation (UI)

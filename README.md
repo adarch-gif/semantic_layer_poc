@@ -11,6 +11,9 @@ Recommended reading:
 For a quick run:
 - SQL scripts: invoice_semantic_layer/sql_semantic_poc/
 - Automation config: invoice_semantic_layer/infra/databricks.yml
+- Databricks Metrics opt-in: invoice_semantic_layer/sql_semantic_poc/10_metric_views_semantic_poc.sql publishes metric views that surface in the Metrics UI once the feature is enabled in your workspace.
 - Genie benchmark notebook: invoice_semantic_layer/notebooks/Benchmark_Questions.sql
+
+Metric views (`mv_invoice_*_semantic_poc`) layer curated sums, counts, freight, tax, and discount measures on top of the semantic views. Once script 10 runs and Databricks Metrics (Preview) is enabled, stakeholders can build scorecards directly in the Metrics UI without additional SQL.
 
 Every supporting document (architecture, deployment flow, Genie setup, runbook, etc.) is numbered in invoice_semantic_layer/docs/ for easy navigation.

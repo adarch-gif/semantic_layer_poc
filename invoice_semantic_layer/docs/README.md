@@ -32,8 +32,11 @@ Run the scripts in `sql_semantic_poc/` sequentially (Databricks SQL editor or `%
 5. `05_metrics_registry_semantic_poc.sql`
 6. `06_synonyms_registry_semantic_poc.sql`
 7. `07_semantic_views_semantic_poc.sql`
-8. `08_permissions_semantic_poc.sql`
-9. `09_validation_semantic_poc.sql`
+8. `10_metric_views_semantic_poc.sql`
+9. `08_permissions_semantic_poc.sql`
+10. `09_validation_semantic_poc.sql`
+
+> Script 10 publishes metric views and should run immediately after 07 before the permissions and validation scripts.
 
 ### 3.2 Databricks Asset Bundle (Automated)
 1. Authenticate with the Databricks CLI (`databricks auth login`).
@@ -73,6 +76,17 @@ Run the scripts in `sql_semantic_poc/` sequentially (Databricks SQL editor or `%
 | `cfascdodev_primary.invoice_semantic_poc.v_invoice_restaurant_semantic_poc` | `v_invoice_lines_semantic_poc` + `dim_restaurant_semantic_poc` | Restaurant region, timezone, spend | Store/operator performance. |
 | `cfascdodev_primary.invoice_semantic_poc.v_invoice_dc_semantic_poc` | `v_invoice_lines_semantic_poc` + `dim_dc_semantic_poc` | Distribution center metrics (spend, freight, tax) | Supply chain analysis. |
 | `cfascdodev_primary.invoice_semantic_poc.v_invoice_calendar_semantic_poc` | `v_invoice_lines_semantic_poc` + `dim_date_semantic_poc` | Calendar + fiscal fields with spend/quantity | Time-series and fiscal reporting. |
+
+### 4.3 Metric Views
+| Metric View | Source Semantic View | Highlights | Where It Appears |
+|-------------|----------------------|------------|-------------------|
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_supplier_semantic_poc` | `v_invoice_supplier_semantic_poc` | Measures supplier spend, freight, tax, discounts, and line counts by supplier attributes. | Databricks Metrics UI for supplier spend dashboards. |
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_item_semantic_poc` | `v_invoice_item_semantic_poc` | Tracks net spend, quantity, freight, tax, and discount by product attributes. | Databricks Metrics UI for item performance. |
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_restaurant_semantic_poc` | `v_invoice_restaurant_semantic_poc` | Summarizes restaurant spend and logistics by region, timezone, and location. | Databricks Metrics UI for operator insights. |
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_dc_semantic_poc` | `v_invoice_dc_semantic_poc` | Surfaces distribution center spend, freight, and discounts. | Databricks Metrics UI for supply chain reviews. |
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_calendar_semantic_poc` | `v_invoice_calendar_semantic_poc` | Provides fiscal and calendar trend measures for spend and quantity. | Databricks Metrics UI and scheduled trend boards. |
+
+> Databricks Metrics must be enabled in your workspace (Preview as of 2024). Metric views become queryable in the Metrics browser immediately after `10_metric_views_semantic_poc.sql` succeeds.
 
 ## 5. Seed Data Snapshot
 - 3 suppliers (Fresh Farms, Ocean Catch, Spice Route)

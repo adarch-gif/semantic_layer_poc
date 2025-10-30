@@ -52,6 +52,13 @@ Run the SQL scripts in numeric order; each builds on the previous. After initial
 - **Features**: Standardized column names, calculated invoice amount, freight/tax/discount measures, joined attributes.
 - **Why**: Views form the trusted layer analysts and Genie will query; they hide raw schema complexity.
 
+### 10_metric_views_semantic_poc.sql – Publish Metric Views
+- **Goal**: Register reusable metric views so Databricks Metrics can query curated measures by supplier, item, restaurant, distribution center, or calendar grain.
+- **Objects**: `mv_invoice_supplier_semantic_poc`, `mv_invoice_item_semantic_poc`, `mv_invoice_restaurant_semantic_poc`, `mv_invoice_dc_semantic_poc`, `mv_invoice_calendar_semantic_poc`.
+- **Features**: Declares standard measures (spend, quantity, freight, tax, discount, line counts), dimensions, and `TIMESTAMP invoice_date` for time-based slicing.
+- **Why**: Enables stakeholders to build Metrics dashboards without writing SQL. Requires the Databricks Metrics (Preview) feature to be enabled in the workspace.
+- **Note**: Although numbered `10_`, this script must execute immediately after `07_semantic_views_semantic_poc.sql` because it depends on the semantic views before permissions tighten access.
+
 ### 08_permissions_semantic_poc.sql – Apply Governance
 - **Goal**: Grant access to semantic assets while shielding gold tables.
 - **Actions**: Using the `account users` principal, grant catalog/schema usage and SELECT on semantic views; revoke all privileges on the gold schema tables.
@@ -67,7 +74,7 @@ Run the SQL scripts in numeric order; each builds on the previous. After initial
 - **Why**: Serves as a quality gate; any FAIL result should be investigated prior to sharing with stakeholders.
 
 ## Recommended Operational Flow
-1. Execute scripts 01–09 in order on the `General Purpose` warehouse.
+1. Execute scripts 01–07, then 10, 08, and 09 on the `General Purpose` warehouse (metric views must exist before permissions run).
 2. Review validation output; remediate any FAIL status.
 3. Optionally configure Genie Space (outside scope of SQL scripts) trusting the semantic views and registries.
 4. Schedule re-runs of validation after data/model changes to ensure ongoing quality.
@@ -75,7 +82,7 @@ Run the SQL scripts in numeric order; each builds on the previous. After initial
 ## Talking Points for Stakeholders
 - We create isolated schemas with PoC naming to avoid polluting production.
 - Gold tables and seed data simulate the invoice domain; registries capture additional metadata Genie requires.
-- Semantic views are the only surfaces analysts touch, ensuring consistent metrics and governance.
+- Semantic views are the only query surfaces, and metric views layer curated aggregations for Databricks Metrics dashboards.
 - The permissions script enforces that only the semantic schema is visible to analysts.
 - Validation script proves we meet documentation and metric standards before release.
 
@@ -144,4 +151,23 @@ This runbook can accompany the scripts during walkthroughs to explain what each 
 - Analysts are granted SELECT on only these views (via `08_permissions_semantic_poc.sql`), ensuring governance.
 - Metric and synonym registries reference column names exposed by these views, enabling accurate join paths and vocabulary mapping.
 - Validation script queries these views to confirm metric reconciliation and sample outputs.
+
+### Metric Views (10_metric_views_semantic_poc.sql)
+| Metric View | Measures | Core Dimensions | Usage |
+|-------------|----------|-----------------|-------|
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_supplier_semantic_poc` | Spend, quantity, freight, tax, discount, line count | Supplier id/name/category/country/active flag, currency | Build supplier spend scorecards in Databricks Metrics. |
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_item_semantic_poc` | Spend, quantity, freight, tax, discount, line count | Item id/name/category/UOM/brand, currency | Analyze item performance trends without SQL. |
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_restaurant_semantic_poc` | Spend, quantity, freight, tax, discount, line count | Restaurant id/name/region/timezone/location, currency | Track restaurant spend by geography or timezone. |
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_dc_semantic_poc` | Spend, quantity, freight, tax, discount, line count | DC id/name/code/region/timezone, currency | Evaluate supply-chain spend and logistics cost by DC. |
+| `cfascdodev_primary.invoice_semantic_poc.mv_invoice_calendar_semantic_poc` | Spend, quantity, freight, tax, discount, line count | Date key, calendar/fiscal attributes, currency | Visualize trend lines and fiscal comparisons. |
+
+**How They Are Created (10_metric_views_semantic_poc.sql)**
+1. `USE CATALOG cfascdodev_primary` to scope the session.
+2. `CREATE OR REPLACE METRIC VIEW` statements wrap each semantic view, casting `invoice_date` to TIMESTAMP and enumerating measures/dimensions.
+3. Measures default to SUM/COUNT aggregations so Databricks Metrics can auto-generate charts without custom SQL.
+
+**Prerequisites and Usage Notes**
+- Databricks Metrics (Preview) must be enabled for your workspace. Once enabled, metric views appear under the catalog/schema in the Metrics browser.
+- Permissions from `08_permissions_semantic_poc.sql` continue to govern access; analysts require SELECT on the underlying metric views.
+- Re-run `10_metric_views_semantic_poc.sql` whenever semantic view schemas change so the metric definitions stay aligned.
 

@@ -101,9 +101,10 @@ graph TD
 1. **Load Gold Tables**: Fact and dimensions reside in `${SCHEMA_GOLD}` after ETL or seed scripts run.
 2. **Populate Registries**: Insert rows into `relationships`, `metrics`, and `synonyms`. These provide metadata context.
 3. **Create Semantic Views**: Use `/sql/07_semantic_views.sql` to expose curated views referencing gold tables and registry logic.
-4. **Run Validation**: Execute `/sql/09_validation.sql` to confirm comment coverage, join reachability, and metric reconciliation.
-5. **Configure Genie**: Trust only the semantic views and link the registries so Genie can answer natural-language questions reliably.
-6. **Analyst Consumption**: Analysts query the views directly or via Genie, confident that joins, metrics, and terminology are standardised.
+4. **Publish Metric Views**: Run `/sql/10_metric_views.sql` to register Databricks metric views that package common measures and dimensions for the Metrics UI.
+5. **Run Validation**: Execute `/sql/09_validation.sql` to confirm comment coverage, join reachability, and metric reconciliation.
+6. **Configure Genie**: Trust only the semantic views and link the registries so Genie can answer natural-language questions reliably.
+7. **Analyst Consumption**: Analysts query the views or metric views directly—or via Genie—confident that joins, metrics, and terminology are standardised.
 
 ## 8. Implementation Checklist
 - [ ] Confirm gold tables are accurate and commented.
@@ -111,6 +112,7 @@ graph TD
 - [ ] Collect KPI definitions and populate metrics registry.
 - [ ] Capture business vocabulary and store in synonyms registry.
 - [ ] Build and comment semantic views; refresh as data model evolves.
+- [ ] Publish metric views once Databricks Metrics is enabled; refresh after semantic view changes.
 - [ ] Run validations and benchmarks; resolve any `FAIL` statuses.
 - [ ] Communicate artefact ownership for ongoing maintenance.
 

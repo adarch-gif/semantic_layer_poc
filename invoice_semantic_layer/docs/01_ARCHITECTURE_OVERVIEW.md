@@ -82,14 +82,15 @@ flowchart TD
   F --> G[05_metrics_registry.sql]
   G --> H[06_synonyms_registry.sql]
   H --> I[07_semantic_views.sql]
-  I --> J[08_permissions.sql]
-  J --> K[09_validation.sql]
-  K --> L[metadata_gap_report.sql]
-  L --> M[Benchmark_Questions.sql]
-  M --> N[Configure Genie Space]
-  N --> O[Deploy databricks.yml]
-  O --> P[Schedule jobs.json]
-  P --> Q[Operate & iterate]
+  I --> J[10_metric_views.sql]
+  J --> K[08_permissions.sql]
+  K --> L[09_validation.sql]
+  L --> M[metadata_gap_report.sql]
+  M --> N[Benchmark_Questions.sql]
+  N --> O[Configure Genie Space]
+  O --> P[Deploy databricks.yml]
+  P --> Q[Schedule jobs.json]
+  Q --> R[Operate & iterate]
 ```
 **Explanation**: The flow highlights when each asset is applied and the dependencies between them. Validation and automation steps provide the control gates.
 

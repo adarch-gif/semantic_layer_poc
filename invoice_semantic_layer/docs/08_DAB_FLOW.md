@@ -20,7 +20,7 @@ databricks bundle run semantic_layer_deploy
 5. Monitor results in the Databricks UI (Jobs > Invoice Analytics Semantic Deploy).
 
 ## How This Changes the Semantic Layer Approach
-- **Automation**: All SQL scripts (schemas → views → validation) run in order without manual execution, reducing human error.
+- **Automation**: All SQL scripts (schemas → views → metric views → validation) run in order without manual execution, reducing human error.
 - **Repeatability**: Promoting PoC → dev → prod is as simple as adjusting bundle vars (catalog, schemas) and redeploying.
 - **Traceability**: Deployment history and logs live in Databricks Jobs, aiding audits and troubleshooting.
 - **Extensibility**: Adding new steps (e.g., additional validations, notebooks) is just another task entry.
@@ -62,11 +62,12 @@ Each task:
 5. **`sql_05_metrics`** – creates metrics registry.
 6. **`sql_06_synonyms`** – creates synonyms registry.
 7. **`sql_07_views`** – builds semantic views.
-8. **`sql_08_permissions`** – applies governance grants.
-9. **`sql_09_validation`** – runs validation queries.
-10. **`notebook_benchmarks`** – executes `notebooks/Benchmark_Questions.sql` on a one-node cluster for NLQ regression checks.
+8. **`sql_10_metric_views`** – publishes metric views so Databricks Metrics can surface curated KPIs.
+9. **`sql_08_permissions`** – applies governance grants.
+10. **`sql_09_validation`** – runs validation queries.
+11. **`notebook_benchmarks`** – executes `notebooks/Benchmark_Questions.sql` on a one-node cluster for NLQ regression checks.
 
-- Dependency chain ensures proper order: views run only after registries exist, permissions after views, validations after permissions, notebook after validation. If any step fails, the job stops.
+- Dependency chain ensures proper order: views run only after registries exist, metric views after views, permissions after metric views, validations after permissions, notebook after validation. If any step fails, the job stops.
 
 ### 4. Artifacts Block
 - Lists files (SQL, notebooks, docs) to package with the bundle so deployment has the correct scripts.
