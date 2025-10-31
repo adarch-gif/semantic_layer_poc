@@ -1,77 +1,49 @@
-# Databricks Semantic Layer & Metric Layer – Field Guide
+# Modern Analytics Needs a Semantic Layer
 
-## 1. Executive Summary
-- **Purpose**: Describe what the semantic layer is, why it matters, and how to deliver it quickly on Databricks.
-- **Outcome**: Business-ready metrics exposed through Databricks Metrics UI, powered by governed semantic views.
+## Executive Summary
+Stakeholders demand fast, accurate insight, yet many organisations still rely on analysts to stitch raw data into bespoke reports. A semantic layer solves that problem by standardising business definitions and exposing governed metrics that anyone can trust. Databricks unifies the underlying data engineering and the semantic layer on one platform, reducing time to value and eliminating duplicated work across BI tools.
 
-## 2. The Need for a Semantic Layer
-- Analysts rebuild the same KPIs in every tool ? inconsistent numbers.
-- AI/BI assistants (Genie) need curated joins and definitions to answer correctly.
-- Executives want a single version of truth with auditable lineage.
+## Why a Semantic Layer Matters
+- **Single Version of Truth**: Business teams no longer argue over “whose number is right.” Measures are defined once and reused everywhere.
+- **Speed at Scale**: Analysts spend less time rebuilding joins and calculations; they focus on answering the next question.
+- **AI & NLQ Ready**: GenAI applications (e.g., Databricks Genie) rely on curated relationships and metrics. A governed layer ensures AI answers match official dashboards.
+- **Auditability & Governance**: Every metric ties back to a secure lineage in Unity Catalog, simplifying compliance and change control.
 
-## 3. Databricks Foundations (What / Where)
-| Capability | Role in the Semantic Layer |
-|------------|----------------------------|
-| **Unity Catalog** | Central catalog + governance for schemas, permissions, lineage |
-| **Delta Lake** | Stores gold fact/dimension tables with ACID reliability |
-| **Semantic Views** | SQL views that expose friendly columns and derived measures |
-| **Metric Views (YAML)** | Package measures & dimensions for Databricks Metrics UI |
-| **Databricks Asset Bundles** | Automate deployment of SQL scripts (schemas ? tables ? views ? metrics) |
-| **Databricks Metrics UI / Genie** | Consumption layer (dashboards, natural language) |
+## Why Databricks for the Semantic Layer
+| Challenge | Databricks Advantage |
+|-----------|----------------------|
+| Fragmented data estate across ETL platforms and BI tools | Lakehouse architecture combines data engineering, ML, and analytics in one platform |
+| Metric drift between dashboards | Metric views (Preview) and semantic views enforce consistent measures across SQL, BI, and Genie |
+| Governance gaps | Unity Catalog provides fine-grained access control, lineage, and auditing |
+| Slow, fragile pipelines | Delta Lake and Databricks SQL Warehouse deliver performance and reliability for curated datasets |
+| Manual deployments | Databricks Asset Bundles enable Infrastructure-as-Code for semantic artifacts |
 
-## 4. High-Level Architecture
+## What the Semantic Layer Looks Like on Databricks
+1. **Curated Data Foundation**: Gold fact/dimension tables stored in Delta Lake, catalogued in Unity Catalog.
+2. **Semantic Views**: SQL views that encapsulate business-friendly logic (metrics, joins, naming).
+3. **Metric Views**: YAML-based definitions that package measures/dimensions for Databricks Metrics UI and downstream BI tools.
+4. **Consumption**: Analysts explore metrics in Databricks SQL dashboards or the Metrics UI; Genie uses the same layer to answer natural-language questions.
+
 ```
-[Gold Tables] -> [Semantic Views] -> [Metric Views]
-       |              |                |
-       v              v                v
-   Unity Catalog   Metrics UI     Genie / SQL clients
+Curated Delta Tables ? Semantic Views ? Metric Views ? Metrics UI / BI / Genie
 ```
-- Gold tables deliver the curated data model (fact + dimensions).
-- Semantic views hide modeling complexity and standardise naming.
-- Metric views expose reusable measures/dimensions; Metrics UI reads them directly.
 
-## 5. Implementation Blueprint (How)
-1. **Provision Schemas** (`sql/01_schemas.sql`)
-   - Create gold + semantic schemas in Unity Catalog.
-2. **Build Tables** (`sql/02_tables.sql`)
-   - Define fact + dimension tables with comments.
-   - Load minimal seed data (optional but helpful for demos).
-3. **Author Semantic Views** (`sql/03_semantic_views.sql`)
-   - Join fact to dimensions; calculate measures such as merchandise amount.
-4. **Define Metric Views in YAML** (`sql/04_metric_views.sql`)
-   - Use `CREATE OR REPLACE VIEW ... WITH METRICS LANGUAGE YAML`.
-   - List measures (`SUM(total_invoice_amount)`) and dimensions (`supplier_name`).
-5. **Deploy via Asset Bundle** (`infra/databricks.yml`)
-   - Tasks run 01 ? 04 in order using your SQL warehouse.
-6. **Consume**
-   - Metrics UI: open catalog/schema and drag measures/dimensions onto charts.
-   - SQL: `SELECT * FROM catalog.schema.mv_invoice_supplier_quickstart`.
-   - Genie: point Genie at the semantic views for NLQ (optionally add registries later).
+## Impact for the Organisation
+- **Business Leaders** get faster decisions with consistent KPIs.
+- **Analytics Teams** reuse definitions instead of duplicating SQL across dashboards.
+- **Data Engineers** manage fewer point solutions—everything runs on the lakehouse.
+- **Governance Teams** benefit from catalog-native lineage and permissions.
 
-## 6. Governance Snapshot (Why it Works)
-- Use Unity Catalog privileges to grant `SELECT` on metric views and restrict underlying tables.
-- Comments in tables/views document every field.</n- YAML metric views can include owners/tags to clarify stewardship.
-- Add validation/registries later as the solution matures.
+## Getting Started
+1. Identify the first domain (e.g., finance, supply chain) where metric inconsistency is causing pain.
+2. Stand up curated tables in Delta Lake if they do not already exist.
+3. Define semantic views and metric views for the top metrics; publish them via Databricks Metrics UI.
+4. Roll out to analysts and capture feedback. Expand to new domains iteratively.
 
-## 7. Adoption Checklist
-- **Stakeholders**: Data engineering (build), analytics (consume), business sponsor (approve KPIs).
-- **Training**: Show analysts how to access Metric Views in the Metrics UI and run example queries.
-- **Success Metrics**: Number of dashboards using metric views, consistency between Metric UI and manual SQL checks.
+## Roadmap
+- Add metadata registries (relationships, metrics, synonyms) to boost Genie/BI automation.
+- Automate validation and CI/CD around the semantic assets for production readiness.
+- Extend the semantic layer to additional data domains, creating an enterprise-wide metric catalogue.
 
-## 8. Roadmap (Next Steps)
-- Extend tables/views with real data sources.
-- Add metadata registries (relationships, metrics, synonyms) for Genie integration.
-- Introduce validation scripts and CI/CD gates for production.
-- Layer in monitoring/alerting for nightly deployments.
-
-## 9. Appendix
-- **Key Assets**:
-  - `sql/01_schemas.sql`
-  - `sql/02_tables.sql`
-  - `sql/03_semantic_views.sql`
-  - `sql/04_metric_views.sql`
-  - `infra/databricks.yml`
-- **Glossary**:
-  - *Semantic View*: A curated SQL view joining fact and dimensions.
-  - *Metric View*: Databricks view (YAML) exposing measures/dimensions for Metrics UI.
-  - *Unity Catalog*: Databricks governance plane for assets and permissions.
+## Conclusion
+A semantic layer is no longer optional—organisations that fail to standardise metrics fall behind on accuracy, agility, and AI readiness. Databricks provides a single, governed lakehouse platform where semantic models and metric views coexist with the data that powers them. By adopting the Databricks semantic layer, teams get trustworthy analytics today and a foundation for AI-driven insight tomorrow.
