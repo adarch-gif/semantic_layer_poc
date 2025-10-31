@@ -145,5 +145,3 @@ FROM cfascdodev_primary.invoice_semantic_poc.v_invoice_supplier_semantic_poc;
 
 ## 11. Conclusion
 A Databricks semantic metric layer over the lakehouse consolidates metric logic, documentation, and governance, enabling analytics teams to deliver trustworthy, AI-ready insights. Whether exposing data to Genie, Databricks Metrics, or downstream tools, metric views ensure consistent definitions and rapid adoption across stakeholders.
-
-Use this whitepaper as a reference to plan new domains, extend existing models, or socialize the approach with leadership and data consumers.
