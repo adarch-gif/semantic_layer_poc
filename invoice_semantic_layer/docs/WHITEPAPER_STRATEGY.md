@@ -32,15 +32,15 @@
    - Training & Enablement Tracks
    - Communication Cadence
    - Value Realisation Roadmap
-8. Enhanced Business Narrative for Chick-fil-A
-   - Voice of the Business
+8. Business Value Narrative for Chick-fil-A
+   - Strategic Drivers
    - Quantified Business Case
-   - Data Product Caselets
+   - Domain Caselets
 9. Operating Playbook
    - Run-the-Business Activities
    - Integration Patterns
    - Performance & Cost Optimization
-10. AI and NLQ Deep Dive
+10. AI and NLQ Strategy
 11. Maturity Model & Roadmap
 12. Common Pitfalls
 13. Illustrative Business Scenarios
@@ -149,11 +149,12 @@ Track KPIs such as: % of executive dashboards using certified metric views, redu
 - **Communication**: Monthly release notes, adoption dashboards, recorded walkthroughs.
 - **Value Realisation**: Document milestones (e.g., "Reduce reconciliation effort by 50%", "Enable 100 analysts on metric views by Q3").
 
-## 8. Enhanced Business Narrative for Chick-fil-A
-### Voice of the Business
-- "I need a consistent view of restaurant throughput so we can coach operators weekly." – VP Operations.
-- "Marketing tests slow down because no one agrees on which metric to trust." – Digital Marketing Director.
-- "Supply chain teams spend days reconciling purchase and inventory data." – Supply Chain Analytics Lead.
+## 8. Business Value Narrative for Chick-fil-A
+### Strategic Drivers
+- Restaurant operations need a clear view of throughput, staffing efficiency, and guest experience to coach operators every week without debating numbers.
+- Marketing and digital teams must evaluate innovation tests quickly, ensuring that campaign metrics, digital conversion, and loyalty engagement all reconcile to the same definition.
+- Supply chain and procurement require end-to-end visibility from supplier scorecards to restaurant inventory so disruption signals surface early and expedited shipping is minimised.
+- Finance and corporate planning aim to shorten period close and franchise reporting cycles through certified comp-sales and profitability metrics.
 
 ### Quantified Business Case
 | Domain | Baseline Pain | Semantic Layer Impact | KPI |
@@ -162,7 +163,7 @@ Track KPIs such as: % of executive dashboards using certified metric views, redu
 | Operations | Manual spreadsheet merges for 200+ restaurants | Self-service metric views with regional filters | 5x faster coaching cycles |
 | Supply Chain | Siloed supplier scorecards | Consolidated supplier spend/quality metrics | 20% reduction in supplier review time |
 
-### Data Product Caselets
+### Domain Caselets
 1. **Restaurant Performance Domain** – Metrics such as comp sales, drive-thru times, staffing efficiency. Consumers: franchise operators, operations coaches.
 2. **Supplier Spend Domain** – Metrics such as total spend, quality incidents, on-time delivery. Consumers: procurement leaders, supplier councils.
 3. **Marketing Experimentation Domain** – Metrics such as incremental sales uplift, campaign reach, digital conversion. Consumers: marketing analysts, digital product teams.
@@ -185,11 +186,11 @@ Track KPIs such as: % of executive dashboards using certified metric views, redu
 - Use result caching for popular metric views; schedule refresh windows aligned with data availability.
 - Monitor spend via Databricks cost dashboards; attribute cost to domains for transparency.
 
-## 10. AI and NLQ Deep Dive
-- **Prompt Library**: Maintain a list of approved Genie prompts (e.g., "Show week-over-week change in drive-thru throughput for Atlanta"), including expected answer shapes.
-- **Trust Controls**: Genie trusts only semantic views with certified status; synonyms and relationships guide query generation.
-- **Feedback Loop**: Analysts flag incorrect AI responses, which triggers review of relationships or metric definitions.
-- **Use Cases**: Operator coaching, marketing campaign recap, supply chain risk monitoring.
+## 10. AI and NLQ Strategy
+- **Prompt Library**: Maintain a list of approved Genie prompts (e.g., "Show week-over-week change in drive-thru throughput for Atlanta"), including expected answer shapes and escalation paths.
+- **Trust Controls**: Genie trusts only semantic views and metric views with certified status; synonyms and relationships guide query generation and prevent ambiguous joins.
+- **Feedback Loop**: Analysts flag incorrect AI responses, which triggers steward review of relationships, synonyms, or metric definitions; outcomes are logged for audit.
+- **Use Cases**: Operator coaching, marketing campaign recap, supply chain risk monitoring, franchise owner self-service Q&A.
 
 ## 11. Maturity Model & Roadmap
 | Horizon | Focus |
