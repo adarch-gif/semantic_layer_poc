@@ -210,8 +210,8 @@ Document tangible milestones (e.g., “Reduce monthly reconciliation effort by 5
 ### Appendix D: Recommended Reading and References
 1. Databricks Glossary: [Semantic Layer](https://www.databricks.com/glossary/semantic-layer)
 2. Databricks Documentation: [Metric Views & Metrics UI](https://docs.databricks.com/en/metric-views/index.html) and [Unity Catalog Security](https://docs.databricks.com/en/data-governance/unity-catalog/index.html).
-3. Forbes Tech Council: [Why the Semantic Layer Is Critical for AI](https://www.forbes.com/sites/forbestechcouncil/2023/10/12/why-the-semantic-layer-is-critical-for-ai/).
-4. TechTarget Definition: [What Is a Semantic Layer?](https://www.techtarget.com/searchdatamanagement/definition/semantic-layer).
-5. Case Study – Retail: [Migros Modernises Customer Insights on Databricks](https://www.databricks.com/customers/migros).
-6. Case Study – Financial Services: [TD Bank Builds Trusted Data Products](https://www.databricks.com/customers/td-bank).
+3. QSR Magazine: [How Data Analytics Is Transforming Quick-Service Restaurants](https://www.qsrmagazine.com/technology/how-data-analytics-transforming-quick-service-restaurants/).
+4. TechTarget: [What Is a Semantic Layer?](https://www.techtarget.com/searchdatamanagement/definition/semantic-layer).
+5. Case Study – Food Delivery: [DoorDash Powers Real-Time Logistics with Databricks](https://www.databricks.com/customers/doordash).
+6. Case Study – Meal Kits & Supply Chain: [HelloFresh Personalises Customer Experiences with Databricks](https://www.databricks.com/customers/hellofresh).
 
