@@ -209,8 +209,9 @@ Document tangible milestones (e.g., “Reduce monthly reconciliation effort by 5
 
 ### Appendix D: Recommended Reading and References
 1. Databricks Glossary: [Semantic Layer](https://www.databricks.com/glossary/semantic-layer)
-2. Databricks Documentation: Metric Views, Metrics UI, and Unity Catalog security.
-3. TDWI Research on Semantic Layers and BI modernisation.
-4. Gartner Market Guide for Semantic Layer Tools.
-5. Industry case studies (retail, finance, healthcare) showcasing semantic layer ROI.
+2. Databricks Documentation: [Metric Views & Metrics UI](https://docs.databricks.com/en/metric-views/index.html) and [Unity Catalog Security](https://docs.databricks.com/en/data-governance/unity-catalog/index.html).
+3. TDWI Checklist Report: [Modernizing the Semantic Layer for Next-Generation Analytics](https://tdwi.org/research/2019/08/checklist-modernizing-the-semantic-layer-for-nextgen-analytics.aspx).
+4. Gartner Market Guide: [Semantic Layer Tools](https://www.gartner.com/document/4008669) *(subscription required)*.
+5. Case Study – Retail: [Migros Modernises Customer Insights on Databricks](https://www.databricks.com/customers/migros).
+6. Case Study – Financial Services: [TD Bank Builds Trusted Data Products](https://www.databricks.com/customers/td-bank).
 
