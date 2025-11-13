@@ -179,9 +179,9 @@ Track KPIs such as: % of executive dashboards using certified metric views, redu
 5. Automating prematurely without stable definitions.
 
 ## 13. Illustrative Business Scenarios
-- **Global Retailer**: Harmonised gross margin metrics reduce reconciliation time by 60% and unlock daily reporting across 15 markets.
-- **Financial Services Firm**: Risk metrics governed in the semantic layer streamline regulatory reporting and cut audit findings.
-- **Healthcare Provider**: Consistent patient outcome metrics highlight operational bottlenecks, improving throughput by 12%.
+- **Chick-fil-A® Supply Chain Transparency**: A semantic domain spanning suppliers, inbound logistics, and restaurant inventory surfaces disruption signals three days faster, cutting expedited shipping costs and strengthening vendor accountability.
+- **Menu Innovation Feedback Loop**: Marketing and culinary teams use the semantic layer to track test-market sell-through, guest sentiment, and digital conversion, enabling near-real-time adjustments to limited-time offers.
+- **Operator Coaching Portal**: Franchise operators receive a curated dashboard powered by metric views covering drive-thru throughput, staffing efficiency, food safety alerts, and guest experience—eliminating spreadsheet reconciliations and speeding coaching conversations.
 
 ## 14. Future Outlook
 - Semantic layers become API-first, enabling headless BI experiences.
