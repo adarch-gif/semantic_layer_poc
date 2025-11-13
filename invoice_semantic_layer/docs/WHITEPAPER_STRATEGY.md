@@ -208,10 +208,8 @@ Document tangible milestones (e.g., “Reduce monthly reconciliation effort by 5
 - **Data Steward** – Role responsible for metadata quality and governance enforcement.
 
 ### Appendix D: Recommended Reading and References
-1. Databricks Glossary: [Semantic Layer](https://www.databricks.com/glossary/semantic-layer)
-2. Databricks Documentation: [Metric Views & Metrics UI](https://docs.databricks.com/en/metric-views/index.html) and [Unity Catalog Security](https://docs.databricks.com/en/data-governance/unity-catalog/index.html).
-3. QSR Magazine: [How Data Analytics Is Transforming Quick-Service Restaurants](https://www.qsrmagazine.com/technology/how-data-analytics-transforming-quick-service-restaurants/).
-4. TechTarget: [What Is a Semantic Layer?](https://www.techtarget.com/searchdatamanagement/definition/semantic-layer).
-5. Case Study – Food Delivery: [DoorDash Powers Real-Time Logistics with Databricks](https://www.databricks.com/customers/doordash).
-6. Case Study – Meal Kits & Supply Chain: [HelloFresh Personalises Customer Experiences with Databricks](https://www.databricks.com/customers/hellofresh).
+1. Medium: [Semantic Layers – The Missing Link Between AI and Business Insight](https://medium.com/@axel.schwanke/semantic-layers-the-missing-link-between-ai-and-business-insight-3c733f119be6).
+2. dbt Labs: [Introducing the Semantic Layer](https://www.getdbt.com/blog/semantic-layer-introduction).
+3. Databricks Glossary: [Semantic Layer](https://databricks.com/glossary/semantic-layer).
+4. Databricks Blog: [Building the Semantic Lakehouse at Scale on Databricks](https://www.databricks.com/blog/building-semantic-lakehouse-atscale-and-databricks).
 
