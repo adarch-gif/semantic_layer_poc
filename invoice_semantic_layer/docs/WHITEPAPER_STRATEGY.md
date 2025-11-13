@@ -77,7 +77,35 @@ GenAI tools (e.g., Databricks Genie) need curated metadata to interpret business
 Food safety, ESG, and financial regulations demand traceability. The semantic layer provides documentation, ownership, and change control for metrics used in compliance reporting, reducing audit exposure and response time.
 
 ## 3. Understanding the Semantic Layer
-A semantic layer is a governed abstraction that encodes business entities, relationships, and metrics on top of curated data. Principles include consistency, accessibility, governance, and extensibility. Modern semantic layers live directly on governed Delta tables, eliminating proprietary BI cubes that lock organisations into specific vendors.
+### 3.1 Definition and Principles
+A semantic layer is a governed abstraction that encodes business entities, relationships, and metrics on top of curated data. It translates technical schemas into the language of finance, operations, supply chain, and marketing. Key principles:
+- **Consistency** – Metrics and dimensions are defined once and reused across dashboards, AI tools, spreadsheets, and APIs.
+- **Accessibility** – Business users can explore data using vocabulary they understand, without needing to memorise raw column names or join logic.
+- **Governance** – Ownership, lineage, approval status, and change history are embedded so every number can be traced.
+- **Extensibility** – New domains can onboard without rewriting the core model; shared patterns (e.g., location, calendar) remain consistent.
+
+### 3.2 Layers of Abstraction
+1. **Data Foundation** – Curated Delta tables that align to the business domains (restaurant performance, supplier spend, digital engagement) with strong documentation.
+2. **Semantic Views** – SQL views that join fact and dimension tables, apply business-friendly naming, and calculate standardised measures (e.g., `v_restaurant_performance`, `v_supplier_spend`).
+3. **Metric Views / Metric Layer** – Declarative YAML definitions that package metrics and dimensions for consumption in Databricks Metrics UI, BI tools, or APIs. Metric views ensure a shared definition even when analysts use different tools.
+4. **Consumption** – Dashboards, Genie prompts, AI copilots, and partner portals consume the same semantic definitions, guaranteeing alignment.
+
+### 3.3 Evolution in the Industry
+Early semantic layers lived inside proprietary BI servers or OLAP cubes, forcing organisations to duplicate data for each tool. Modern approaches host semantics directly on cloud lakehouses. Databricks supports open SQL views and metric views, meaning the same assets feed Databricks Metrics, Tableau, Power BI, notebooks, and AI applications. This eliminates vendor lock-in and simplifies multi-tool ecosystems.
+
+### 3.4 Value Pillars and Outcome Metrics
+| Pillar | Practical Impact | Example KPI |
+|--------|------------------|-------------|
+| Decision Confidence | Fewer metric disputes, faster approvals | Reduction in reconciliation hours |
+| Speed to Insight | Analysts focus on storytelling rather than data prep | Time from business question to dashboard |
+| Cost Efficiency | Consolidated semantic tooling and avoided data duplication | Lower total cost of ownership |
+| AI Enablement | Reliable inputs for Genie, chatbots, predictive models | Genie accuracy on benchmark questions |
+| Compliance | Clear lineage for finance, ESG, and food safety reporting | Audit turnaround time |
+
+### 3.5 What the Semantic Layer Is Not
+- **Not** a replacement for BI tools—those still render dashboards and experiences.
+- **Not** merely a data catalog or glossary—it includes executable logic for joins and metrics.
+- **Not** static—metrics evolve with the business, so the semantic layer must have lifecycle management and stewardship.
 
 ## 4. Why Databricks for the Semantic Layer
 - **Lakehouse Architecture** keeps curated tables, AI models, and semantic assets on one platform.
