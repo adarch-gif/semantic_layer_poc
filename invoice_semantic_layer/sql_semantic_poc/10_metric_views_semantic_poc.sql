@@ -7,8 +7,9 @@ AS $$
 version: 1.1
 comment: "Supplier spend, freight, tax, discounts, and invoice line counts."
 source: cfascdodev_primary.invoice_semantic_poc.v_invoice_supplier_semantic_poc
-timestamp: invoice_date
 dimensions:
+  - name: Invoice Date
+    expr: invoice_date
   - name: Supplier ID
     expr: supplier_id
   - name: Supplier Name
@@ -50,8 +51,9 @@ AS $$
 version: 1.1
 comment: "Item-level performance metrics for spend, quantity, freight, and tax."
 source: cfascdodev_primary.invoice_semantic_poc.v_invoice_item_semantic_poc
-timestamp: invoice_date
 dimensions:
+  - name: Invoice Date
+    expr: invoice_date
   - name: Item ID
     expr: item_id
   - name: Item Name
@@ -90,8 +92,9 @@ AS $$
 version: 1.1
 comment: "Restaurant spend and logistics performance by region, timezone, and location."
 source: cfascdodev_primary.invoice_semantic_poc.v_invoice_restaurant_semantic_poc
-timestamp: invoice_date
 dimensions:
+  - name: Invoice Date
+    expr: invoice_date
   - name: Restaurant ID
     expr: restaurant_id
   - name: Restaurant Name
@@ -130,8 +133,9 @@ AS $$
 version: 1.1
 comment: "Distribution center spend and logistics metrics."
 source: cfascdodev_primary.invoice_semantic_poc.v_invoice_dc_semantic_poc
-timestamp: invoice_date
 dimensions:
+  - name: Invoice Date
+    expr: invoice_date
   - name: Distribution Center ID
     expr: dc_id
   - name: Distribution Center Name
@@ -170,8 +174,9 @@ AS $$
 version: 1.1
 comment: "Calendar and fiscal trend metrics for invoice spend and quantity."
 source: cfascdodev_primary.invoice_semantic_poc.v_invoice_calendar_semantic_poc
-timestamp: invoice_date
 dimensions:
+  - name: Invoice Date
+    expr: invoice_date
   - name: Date Key
     expr: date_key
   - name: Calendar Year
