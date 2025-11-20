@@ -1,12 +1,12 @@
 # Metric Views vs Semantic Views - Complete Guide
 
-## Quick Answer
+## Overview
 
-**YES, you already have YAML metric views!** They're in:
+This POC includes both YAML metric views and SQL semantic views:
 - **File**: `/sql_semantic_poc/10_metric_views_semantic_poc.sql`
 - **Documentation**: `/docs/12_METRIC_VIEWS_YAML_GUIDE.md`
 
-This guide explains the relationship between your semantic views (SQL) and metric views (YAML).
+This guide explains the relationship between semantic views (SQL) and metric views (YAML) in the invoice analytics semantic layer.
 
 ---
 
@@ -34,7 +34,7 @@ INNER JOIN dim_supplier_semantic_poc s ON l.supplier_id = s.supplier_id;
 - Data exploration
 - Genie/NLQ integration
 
-**Who uses them**:
+**Target Users**:
 - Analysts writing SQL
 - BI tools (Tableau, Power BI)
 - Databricks Genie
@@ -81,7 +81,7 @@ $$;
 - Consistent aggregations
 - Metadata and governance
 
-**Who uses them**:
+**Target Users**:
 - Business users via Databricks Metrics UI
 - Executives building dashboards
 - Governance teams defining KPIs
@@ -125,7 +125,7 @@ graph TD
 
 ---
 
-## 3. Your 6 Semantic Views (SQL)
+## 3. POC Semantic Views (SQL) - 6 Views
 
 Located in: `/sql_semantic_poc/07_semantic_views_semantic_poc.sql`
 
@@ -140,7 +140,7 @@ Located in: `/sql_semantic_poc/07_semantic_views_semantic_poc.sql`
 
 ---
 
-## 4. Your 5 Metric Views (YAML)
+## 4. POC Metric Views (YAML) - 5 Views
 
 Located in: `/sql_semantic_poc/10_metric_views_semantic_poc.sql`
 
@@ -179,7 +179,7 @@ Located in: `/sql_semantic_poc/10_metric_views_semantic_poc.sql`
 
 ---
 
-## 6. When to Use Each?
+## 6. When to Use Each Type?
 
 ### Use **Semantic Views** (SQL) When:
 - ✅ Writing ad-hoc SQL queries
@@ -187,7 +187,7 @@ Located in: `/sql_semantic_poc/10_metric_views_semantic_poc.sql`
 - ✅ Building custom reports
 - ✅ Using Genie/NLQ
 - ✅ Joining multiple perspectives
-- ✅ Need row-level detail
+- ✅ Needing row-level detail
 
 **Example**:
 ```sql
@@ -208,8 +208,8 @@ GROUP BY supplier_name;
 - ✅ Creating scorecards
 - ✅ Enforcing standard KPIs
 - ✅ Using Databricks Metrics UI
-- ✅ Need governance and lineage
-- ✅ Want point-and-click metrics
+- ✅ Requiring governance and lineage
+- ✅ Wanting point-and-click metrics
 
 **Example**:
 In Databricks Metrics UI:
@@ -238,7 +238,7 @@ source: cfascdodev_primary.invoice_semantic_poc.v_invoice_supplier_semantic_poc
 
 timestamp: invoice_date  # ← Primary time dimension for time-series
 
-dimensions:              # ← Attributes you can group by
+dimensions:              # ← Attributes that can be grouped by
   - name: Supplier Name  # ← Friendly name in UI
     expr: supplier_name  # ← SQL expression from source view
   - name: Supplier Category
@@ -275,7 +275,7 @@ $$;
 -- Metric views can be queried like regular views
 SELECT * FROM cfascdodev_primary.invoice_semantic_poc.mv_invoice_supplier_semantic_poc;
 
--- You can still write custom queries
+-- Custom queries are also supported
 SELECT
   `Supplier Name`,
   `Total Invoice Amount`,
@@ -292,7 +292,7 @@ WHERE `Supplier Name` = 'Fresh Farms';
 
 | Benefit | Description |
 |---------|-------------|
-| **Consistency** | Everyone uses the same metric definitions - no "my revenue vs your revenue" |
+| **Consistency** | All users employ the same metric definitions - eliminates "my revenue vs your revenue" discrepancies |
 | **Governance** | Owners, tags, and metadata tracked in code |
 | **Discoverability** | Business-friendly names appear in Metrics UI |
 | **Pre-aggregation** | Metrics always correctly aggregated (SUM, COUNT, AVG) |
@@ -303,9 +303,9 @@ WHERE `Supplier Name` = 'Fresh Farms';
 
 ---
 
-## 10. Deployment Order in Your POC
+## 10. Deployment Order in the POC
 
-Your Databricks Asset Bundle already deploys in the correct order:
+The Databricks Asset Bundle deploys in the correct order:
 
 ```
 Step 1: 01_schemas                    → Create schemas
@@ -328,12 +328,12 @@ Step 10: 09_validation                → Validate everything
 
 ### Use Case 1: Executive Dashboard (Use Metric Views)
 
-**Requirement**: "Show me total spend by supplier for last quarter"
+**Requirement**: "Show total spend by supplier for last quarter"
 
 **Solution**: Use `mv_invoice_supplier_semantic_poc` in Metrics UI
 - **Why**: Pre-defined "Total Invoice Amount" measure
 - **Benefit**: Consistent across all reports
-- **User**: Non-technical executive
+- **Target User**: Non-technical executive
 
 ---
 
@@ -356,13 +356,13 @@ HAVING freight_pct > 0.10 AND total_qty > 100;
 
 **Why**: Complex logic not pre-defined in metric view
 **Benefit**: Flexibility for ad-hoc analysis
-**User**: Data analyst
+**Target User**: Data analyst
 
 ---
 
 ## 12. Viewing Metric Views in Databricks
 
-After deployment, you can find metric views here:
+After deployment, metric views can be found in these locations:
 
 ### In Databricks UI:
 1. **Catalog Explorer**:
@@ -387,7 +387,7 @@ After deployment, you can find metric views here:
 
 ## 13. Quick Reference
 
-### Your POC Has Both:
+### POC Includes Both View Types:
 
 | Type | Count | Location | Purpose |
 |------|-------|----------|---------|
@@ -403,7 +403,7 @@ After deployment, you can find metric views here:
 
 ## 14. How to Add a New Metric View
 
-**Scenario**: You want to add a metric view for average unit price by item
+**Scenario**: Adding a metric view for average unit price by item
 
 ### Step 1: Ensure semantic view exists
 ```sql
@@ -465,19 +465,25 @@ Script `08_permissions_semantic_poc.sql` automatically grants access to all view
 
 ## 16. Summary
 
-✅ **You already have YAML metric views configured!**
+### What This POC Includes:
 
 - **Semantic Views (SQL)**: 6 views for flexible analytics
 - **Metric Views (YAML)**: 5 metric views for governed reporting
-- **Both deployed**: Via script 07 and 10 in your DAB pipeline
-- **Documentation**: Complete guide in `12_METRIC_VIEWS_YAML_GUIDE.md`
+- **Deployment**: Both deployed via scripts 07 and 10 in the DAB pipeline
+- **Documentation**: Complete guide available in `12_METRIC_VIEWS_YAML_GUIDE.md`
 
-**Next Steps**:
-1. Run the deployment if you haven't: `databricks bundle run semantic_layer_deploy`
+### Deployment Verification Steps:
+1. Run deployment: `databricks bundle run semantic_layer_deploy`
 2. Verify metric views exist: `SHOW VIEWS IN invoice_semantic_poc LIKE 'mv_%';`
 3. Access Databricks Metrics UI to explore
 4. Test queries against both semantic and metric views
 
-**Questions?**
-- Review: [12_METRIC_VIEWS_YAML_GUIDE.md](12_METRIC_VIEWS_YAML_GUIDE.md)
-- Check: [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md) for script details
+### Additional Resources:
+- Technical Guide: [12_METRIC_VIEWS_YAML_GUIDE.md](12_METRIC_VIEWS_YAML_GUIDE.md)
+- Script Details: [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md)
+
+---
+
+**Document Version**: 1.0
+**Last Updated**: 2025-01-20
+**Maintained by**: Data Engineering Team
