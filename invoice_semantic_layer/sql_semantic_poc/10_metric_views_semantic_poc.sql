@@ -37,11 +37,6 @@ measures:
     expr: SUM(COALESCE(discount_amount, 0))
   - name: Invoice Line Count
     expr: COUNT(1)
-owners:
-  - name: Finance Analytics
-    email: finance.analytics@example.com
-tags:
-  - supplier-insights
 $$;
 
 CREATE OR REPLACE VIEW `cfascdodev_primary`.`invoice_semantic_poc`.mv_invoice_item_semantic_poc
