@@ -62,7 +62,58 @@ dimensions:
 
 ---
 
-## Issue 2: YAML Indentation Errors
+## Issue 2: "Unrecognized field 'owners'" or "'tags'" Error
+
+### Error Message:
+```
+[METRIC_VIEW_INVALID_VIEW_DEFINITION] The metric view definition is invalid.
+Reason: Failed to parse YAML: Unrecognized field "owners"
+(class com.databricks.sql.serde.v11.MetricView),
+not marked as ignorable (8 known properties: "measures", "version", "joins",
+"source", "dimensions", "comment", "filter", "materialization")
+```
+
+### Root Cause:
+The `owners` and `tags` fields are not supported in the current Databricks YAML metric view schema (version 1.1), despite being shown in some documentation examples.
+
+### Solution:
+Remove `owners:` and `tags:` blocks from the YAML:
+
+#### ❌ Incorrect (causes error):
+```yaml
+measures:
+  - name: Total Invoice Amount
+    expr: SUM(COALESCE(invoice_amount, 0))
+  - name: Invoice Line Count
+    expr: COUNT(1)
+owners:              # ← This causes the error
+  - name: Finance Analytics
+    email: finance.analytics@example.com
+tags:                # ← This also causes the error
+  - supplier-insights
+$$;
+```
+
+#### ✅ Correct (works):
+```yaml
+measures:
+  - name: Total Invoice Amount
+    expr: SUM(COALESCE(invoice_amount, 0))
+  - name: Invoice Line Count
+    expr: COUNT(1)
+$$;              # ← End immediately after measures
+```
+
+### Impact:
+- **Metadata**: Owners and tags cannot be stored in metric view YAML (use external documentation or Unity Catalog tagging)
+- **Governance**: Document ownership in comments or separate governance registry
+
+### Fixed in Commit:
+`4f92743` - "Remove unsupported owners and tags fields from metric views"
+
+---
+
+## Issue 3: YAML Indentation Errors
 
 ### Error Message:
 ```
@@ -98,7 +149,7 @@ measures:
 
 ---
 
-## Issue 3: Missing Aggregation in Measures
+## Issue 4: Missing Aggregation in Measures
 
 ### Error Message:
 ```
@@ -126,7 +177,7 @@ measures:
 
 ---
 
-## Issue 4: Source View Does Not Exist
+## Issue 5: Source View Does Not Exist
 
 ### Error Message:
 ```
@@ -156,7 +207,7 @@ source: cfascdodev_primary.invoice_semantic_poc.v_invoice_supplier_semantic_poc
 
 ---
 
-## Issue 5: Invalid Expression Syntax
+## Issue 6: Invalid Expression Syntax
 
 ### Error Message:
 ```
@@ -186,7 +237,7 @@ dimensions:
 
 ---
 
-## Issue 6: Friendly Names with Special Characters
+## Issue 7: Friendly Names with Special Characters
 
 ### Error Message:
 ```
@@ -215,7 +266,7 @@ FROM cfascdodev_primary.invoice_semantic_poc.mv_invoice_supplier_semantic_poc;
 
 ---
 
-## Issue 7: Version Mismatch
+## Issue 8: Version Mismatch
 
 ### Error Message:
 ```
@@ -252,11 +303,11 @@ Based on the error message, these are the **only** supported fields:
 | `materialization` | No | Object | Materialization settings (advanced usage) |
 
 ### Fields NOT Supported (as of this POC):
-- ❌ `timestamp` - Use as a dimension instead
-- ❌ `owners` - May be supported in future versions
-- ❌ `tags` - May be supported in future versions
+- ❌ `timestamp` - Use as a dimension instead (causes parse error if included)
+- ❌ `owners` - Not supported (causes parse error if included)
+- ❌ `tags` - Not supported (causes parse error if included)
 
-**Note**: The POC YAML files include `owners` and `tags` for documentation purposes, but Databricks currently ignores them (they don't cause errors, just silently skipped).
+**Important**: Do NOT include `timestamp`, `owners`, or `tags` in the YAML - they will cause "Unrecognized field" errors and prevent metric view creation.
 
 ---
 
