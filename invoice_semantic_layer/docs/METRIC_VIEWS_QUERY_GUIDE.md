@@ -1,6 +1,27 @@
 # Metric Views Query Guide
 
-## Quick Reference for Querying Databricks Metric Views
+## ⚠️ DEPRECATION NOTICE
+
+**This document contains outdated syntax that will cause errors.**
+
+**Please use the updated guide instead:**
+- **[METRIC_VIEWS_CORRECT_SYNTAX.md](METRIC_VIEWS_CORRECT_SYNTAX.md)** ← **Use this for correct query syntax**
+
+**Key difference**: Metric view measures require `MEASURE()` function, not `SUM()` or other aggregation functions.
+
+```sql
+-- ❌ WRONG (this document shows):
+SUM(`Total Invoice Amount`)
+
+-- ✅ CORRECT (use instead):
+MEASURE(`Total Invoice Amount`)
+```
+
+**This document is kept for historical reference only. Do not follow the query examples below.**
+
+---
+
+## Quick Reference for Querying Databricks Metric Views (OUTDATED)
 
 ---
 
