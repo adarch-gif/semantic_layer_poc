@@ -65,6 +65,7 @@ This POC demonstrates a **semantic layer** that provides:
 | File | Purpose | Audience |
 |------|---------|----------|
 | **[14_CLEANUP_AND_REDEPLOY_GUIDE.md](14_CLEANUP_AND_REDEPLOY_GUIDE.md)** | Complete cleanup scripts and fresh deployment | Data Engineers, Operators |
+| **[15_DEPLOYMENT_CHECKLIST.md](15_DEPLOYMENT_CHECKLIST.md)** | Printable checklist for deployment verification | All Deployers |
 | **[README.md](README.md)** | Original comprehensive README | All users |
 
 ### **Whitepapers & Strategy**
@@ -170,7 +171,7 @@ DROP SCHEMA IF EXISTS invoice_semantic_poc CASCADE;
 DROP SCHEMA IF EXISTS invoice_gold_semantic_poc CASCADE;
 ```
 
-See: [CLEANUP_AND_REDEPLOY_GUIDE.md](CLEANUP_AND_REDEPLOY_GUIDE.md)
+See: [14_CLEANUP_AND_REDEPLOY_GUIDE.md](14_CLEANUP_AND_REDEPLOY_GUIDE.md)
 
 ---
 

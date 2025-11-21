@@ -561,8 +561,8 @@ LIMIT 10;
 ## 📖 Related Documentation
 
 - **Quick Start**: [00_QUICK_START_GUIDE.md](00_QUICK_START_GUIDE.md)
-- **Metric Views Explained**: [METRIC_VIEWS_EXPLAINED.md](METRIC_VIEWS_EXPLAINED.md)
-- **Troubleshooting**: [METRIC_VIEWS_TROUBLESHOOTING.md](METRIC_VIEWS_TROUBLESHOOTING.md)
+- **Metric Views Explained**: [11_METRIC_VIEWS_EXPLAINED.md](11_METRIC_VIEWS_EXPLAINED.md)
+- **Troubleshooting**: [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md)
 - **SQL Runbook**: [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md)
 
 ---

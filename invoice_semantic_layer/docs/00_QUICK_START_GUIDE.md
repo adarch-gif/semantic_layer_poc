@@ -23,21 +23,44 @@ The Invoice Analytics Semantic Layer POC showcases:
 
 Before starting, verify access to:
 
+### Required Access
+
 1. **Databricks Workspace**: Access to `cfascdodev_primary` catalog
 2. **SQL Warehouse**: `General Purpose` warehouse (or equivalent)
 3. **Permissions**:
    - CREATE SCHEMA on catalog
    - USE CATALOG on `cfascdodev_primary`
-   - Admin or power user role
+   - Admin or power user role (for permissions script)
+
+### Environment Variables
+
+The POC uses these default values (update if your environment differs):
+
+| Variable | Default Value | Purpose |
+|----------|---------------|---------|
+| **CATALOG** | `cfascdodev_primary` | Unity Catalog name |
+| **SCHEMA_GOLD** | `invoice_gold_semantic_poc` | Gold layer schema |
+| **SCHEMA_SEM** | `invoice_semantic_poc` | Semantic layer schema |
+| **GROUP_ANALYSTS** | `account users` | Principal for analyst access |
+| **WAREHOUSE_NAME** | `General Purpose` | SQL warehouse name |
 
 **Verify access**:
 ```sql
 -- Run this in Databricks SQL Editor
 SELECT current_catalog(), current_user();
 USE CATALOG cfascdodev_primary;
+
+-- Check warehouse access
+SHOW WAREHOUSES;
 ```
 
 If this succeeds, proceed to deployment.
+
+### Optional: Databricks Metrics (Preview)
+
+For metric views to work, Databricks Metrics must be enabled:
+- Check workspace feature flags
+- Contact Databricks support if metric views fail with "feature not enabled" error
 
 ---
 
@@ -77,22 +100,22 @@ databricks bundle run semantic_layer_deploy
 
 3. **Run scripts in order** (copy/paste from `/sql_semantic_poc/`):
 
-| Script | Purpose | Time |
-|--------|---------|------|
-| `01_create_schema_gold_semantic_poc.sql` | Create gold schema | 10s |
-| `02_fact_invoice_line_semantic_poc.sql` | Create fact table | 30s |
-| `03_dim_supplier_semantic_poc.sql` | Create supplier dimension | 20s |
-| `04_dim_item_semantic_poc.sql` | Create item dimension | 20s |
-| `05_dim_restaurant_semantic_poc.sql` | Create restaurant dimension | 20s |
-| `06_dim_distribution_center_semantic_poc.sql` | Create DC dimension | 20s |
-| `07_dim_calendar_semantic_poc.sql` | Create calendar dimension | 20s |
-| `08_create_schema_semantic_poc.sql` | Create semantic schema | 10s |
-| `09_semantic_views_semantic_poc.sql` | Create 6 semantic views | 1min |
-| `10_metric_views_semantic_poc.sql` | Create 5 metric views | 1min |
-| `11_metadata_registries_semantic_poc.sql` | Create metadata registries | 30s |
-| `12_permissions_semantic_poc.sql` | Set permissions | 30s |
+| Order | Script | Purpose | Time |
+|-------|--------|---------|------|
+| 1 | `01_schemas_semantic_poc.sql` | Create both schemas (gold + semantic) | 10s |
+| 2 | `02_gold_tables_semantic_poc.sql` | Create fact and dimension tables | 30s |
+| 3 | `03_seed_data_semantic_poc.sql` | Load sample data | 30s |
+| 4 | `04_relationship_registry_semantic_poc.sql` | Create relationship metadata | 10s |
+| 5 | `05_metrics_registry_semantic_poc.sql` | Create metrics metadata | 10s |
+| 6 | `06_synonyms_registry_semantic_poc.sql` | Create synonyms metadata | 10s |
+| 7 | `07_semantic_views_semantic_poc.sql` | Create 6 semantic views | 1min |
+| 8 | `10_metric_views_semantic_poc.sql` | Create 5 metric views (run before permissions!) | 1min |
+| 9 | `08_permissions_semantic_poc.sql` | Set permissions and governance | 30s |
+| 10 | `09_validation_semantic_poc.sql` | Validate deployment quality | 30s |
 
-**Total time**: ~6 minutes
+**Total time**: ~5 minutes
+
+**Important**: Scripts 08 and 10 are intentionally out of numeric order - metric views (10) must be created before permissions (08) are applied.
 
 📖 **Detailed walkthrough**: [04_DEPLOYMENT_WALKTHROUGH.md](04_DEPLOYMENT_WALKTHROUGH.md)
 
@@ -443,6 +466,50 @@ After completing this quick start:
 - **Metric Views**: https://docs.databricks.com/aws/en/metric-views/create/sql
 - **Unity Catalog**: https://docs.databricks.com/data-governance/unity-catalog/
 - **Genie**: https://docs.databricks.com/genie/
+
+---
+
+## Pre-Deployment Checklist
+
+Before deploying the POC, ensure you have completed all prerequisites:
+
+### Access Verification
+- [ ] Confirmed access to Databricks workspace
+- [ ] Verified `cfascdodev_primary` catalog exists and is accessible
+- [ ] Confirmed SQL warehouse (`General Purpose`) is running
+- [ ] Validated user has CREATE SCHEMA permissions on catalog
+- [ ] Validated user has USE CATALOG permissions
+- [ ] (For permissions script) Confirmed user has MANAGE/OWNERSHIP on catalog
+
+### Environment Configuration
+- [ ] Reviewed default environment variables (catalog, schemas, warehouse, principal)
+- [ ] Decided whether to use default values or customize for your environment
+- [ ] If customizing: Updated variable values in all SQL scripts
+- [ ] Identified principal for analyst access (`account users` or dedicated group)
+
+### Deployment Method Selection
+- [ ] Chose deployment method: Manual UI or Automated DAB
+- [ ] (If Manual) Have Databricks SQL Editor open
+- [ ] (If Automated) Have Databricks CLI installed and authenticated
+- [ ] (If Automated) Cloned repository locally
+- [ ] (If Automated) Verified `databricks bundle validate` passes
+
+### Optional Features
+- [ ] (Optional) Verified Databricks Metrics is enabled for metric views
+- [ ] (Optional) Planned Genie Space configuration for natural language queries
+- [ ] (Optional) Identified dashboard tool (PowerBI, Tableau) for consumption layer
+
+### Documentation Readiness
+- [ ] Reviewed [00_README_START_HERE.md](00_README_START_HERE.md) for navigation
+- [ ] Read [00_UNDERSTANDING_VIEWS_AND_QUERIES.md](00_UNDERSTANDING_VIEWS_AND_QUERIES.md) to understand CREATE VIEW behavior
+- [ ] Reviewed [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md) for script sequence
+- [ ] Have [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md) bookmarked for issues
+
+### Post-Deployment Verification Plan
+- [ ] Identified which validation queries to run
+- [ ] Planned to run `09_validation_semantic_poc.sql` to check deployment quality
+- [ ] Know how to use `verify_permissions.sql` to validate security model
+- [ ] Prepared to review validation output for PASS/FAIL status
 
 ---
 
