@@ -306,9 +306,9 @@ Why: Maintain health]:::platform
 - Observability dashboards showing validation history and comment coverage trends.
 
 ## 13. Reference Documents & Next Actions
-- Quick view: `02_ARCHITECTURE_OVERVIEW.md`
-- Step-by-step operations: `DEPLOYMENT_WALKTHROUGH.md`
-- Execution order: `RUN_BOOK.md`
+- Quick view: `03_ARCHITECTURE_OVERVIEW.md`
+- Step-by-step operations: [07_DEPLOYMENT_WALKTHROUGH.md](07_DEPLOYMENT_WALKTHROUGH.md)
+- Execution order: [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md)
 - Immediate next steps: run validation suite, configure Genie, schedule monitoring jobs.
 
 This playbook provides the operational blueprint for building, governing, and evolving the invoice analytics semantic layer on Databricks.
