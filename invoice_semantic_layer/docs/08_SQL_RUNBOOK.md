@@ -80,15 +80,6 @@ Run the SQL scripts in numeric order; each builds on the previous. After initial
 3. Optionally configure Genie Space (outside scope of SQL scripts) trusting the semantic views and registries.
 4. Schedule re-runs of validation after data/model changes to ensure ongoing quality.
 
-## Talking Points for Stakeholders
-- We create isolated schemas with PoC naming to avoid polluting production.
-- Gold tables and seed data simulate the invoice domain; registries capture additional metadata Genie requires.
-- Semantic views are the only query surfaces, and metric views layer curated aggregations for Databricks Metrics dashboards.
-- The permissions script enforces that only the semantic schema is visible to analysts.
-- Validation script proves we meet documentation and metric standards before release.
-
-This runbook can accompany the scripts during walkthroughs to explain what each step accomplishes, why it matters, and how the workflow ties together.
-
 ## Tables Created by the PoC Scripts
 - `cfascdodev_primary.invoice_gold_semantic_poc.fact_invoice_line_semantic_poc` – Invoice line fact table containing measures (line, freight, tax, discounts).
 - `cfascdodev_primary.invoice_gold_semantic_poc.dim_supplier_semantic_poc` – Supplier dimension with descriptive attributes and active flags.
