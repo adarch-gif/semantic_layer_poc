@@ -115,5 +115,5 @@ artifacts:
       - ../sql_semantic_poc/09_validation_semantic_poc.sql
       - ../notebooks/Benchmark_Questions.sql
       - ../tests/metadata_gap_report.sql
-      - ../docs/06_SQL_RUNBOOK.md
-      - ../docs/08_DAB_FLOW.md
+      - ../docs/08_SQL_RUNBOOK.md
+      - ../docs/11_DAB_FLOW.md
