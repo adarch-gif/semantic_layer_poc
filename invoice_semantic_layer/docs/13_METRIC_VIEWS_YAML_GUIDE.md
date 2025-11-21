@@ -337,3 +337,46 @@ $$;
 
 
 
+
+## 10. Querying Metric Views
+
+**Important**: Once metric views are created using the YAML syntax above, **querying** them requires special syntax.
+
+**Do NOT use standard SQL aggregation functions** when querying metric views. Instead, use the `MEASURE()` function:
+
+```sql
+-- ❌ WRONG - Will cause error
+SELECT
+  `Supplier Name`,
+  SUM(`Total Invoice Amount`)
+FROM mv_invoice_supplier_semantic_poc
+GROUP BY `Supplier Name`;
+
+-- ✅ CORRECT - Use MEASURE() function
+SELECT
+  `Supplier Name`,
+  MEASURE(`Total Invoice Amount`) as total_spend
+FROM cfascdodev_primary.invoice_semantic_poc.mv_invoice_supplier_semantic_poc
+GROUP BY `Supplier Name`
+ORDER BY MEASURE(`Total Invoice Amount`) DESC;
+```
+
+**For complete query syntax and examples**, see:
+- [METRIC_VIEWS_CORRECT_SYNTAX.md](METRIC_VIEWS_CORRECT_SYNTAX.md) - Query syntax reference with examples
+
+**Key Query Rules**:
+1. **Dimensions**: Select directly with backticks: `Supplier Name`
+2. **Measures**: Wrap in MEASURE(): MEASURE(`Total Invoice Amount`)
+3. **ORDER BY**: Also use MEASURE(): ORDER BY MEASURE(`Total Invoice Amount`) DESC
+
+---
+
+## 11. Related Documentation
+
+- [METRIC_VIEWS_CORRECT_SYNTAX.md](METRIC_VIEWS_CORRECT_SYNTAX.md) - **How to query metric views** (required reading)
+- [METRIC_VIEWS_VALIDATION_REPORT.md](../../METRIC_VIEWS_VALIDATION_REPORT.md) - Validation results and column reference
+- [12_METRIC_VIEWS_EXPLAINED.md](12_METRIC_VIEWS_EXPLAINED.md) - Concepts and theory
+- [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md) - Common issues and solutions
+- [validate_metric_views.sql](../sql_semantic_poc/validate_metric_views.sql) - Validation script
+
+---
