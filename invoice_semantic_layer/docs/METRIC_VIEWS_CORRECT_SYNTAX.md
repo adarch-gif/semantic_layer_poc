@@ -388,10 +388,10 @@ ORDER BY MEASURE(`Measure Column`) DESC;
 
 ## Related Documentation
 
-- [METRIC_VIEWS_QUERY_GUIDE.md](METRIC_VIEWS_QUERY_GUIDE.md) - Previous version (needs update)
-- [METRIC_VIEWS_VALIDATION_GUIDE.md](METRIC_VIEWS_VALIDATION_GUIDE.md) - Validation steps
-- [12_METRIC_VIEWS_EXPLAINED.md](12_METRIC_VIEWS_EXPLAINED.md) - Concepts
-- [13_METRIC_VIEWS_YAML_GUIDE.md](13_METRIC_VIEWS_YAML_GUIDE.md) - How to create
+- [12_METRIC_VIEWS_EXPLAINED.md](12_METRIC_VIEWS_EXPLAINED.md) - Concepts and theory
+- [13_METRIC_VIEWS_YAML_GUIDE.md](13_METRIC_VIEWS_YAML_GUIDE.md) - How to create metric views
+- [validate_metric_views.sql](../sql_semantic_poc/validate_metric_views.sql) - Validation script
+- [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md) - Common issues
 
 ---
 

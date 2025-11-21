@@ -26,13 +26,6 @@ All metric views documentation has been reviewed, validated, and corrected. The 
 | **METRIC_VIEWS_VALIDATION_REPORT.md** | Report | ✅ Valid | ✅ Complete | Comprehensive validation results |
 | **DEPLOYMENT_FLOWCHART.md** | Visual | ✅ Valid | N/A | High-level flowcharts |
 
-### ⚠️ Legacy Documentation (Deprecated)
-
-| Document | Status | Issue | Resolution |
-|----------|--------|-------|------------|
-| **METRIC_VIEWS_QUERY_GUIDE.md** | ⚠️ Deprecated | Uses SUM() syntax | Added deprecation notice at top |
-| **METRIC_VIEWS_VALIDATION_GUIDE.md** | ⚠️ Incomplete | No MEASURE() examples | Flagged in validation report |
-
 ---
 
 ## Changes Made
@@ -50,25 +43,16 @@ All metric views documentation has been reviewed, validated, and corrected. The 
 
 ---
 
-### 2. METRIC_VIEWS_QUERY_GUIDE.md
-**Status**: ⚠️ Deprecated with warning notice
+### 2. Deprecated Files Removed
+**Status**: ✅ Deleted for clean documentation
 
-**Changes Made**:
-```markdown
-## ⚠️ DEPRECATION NOTICE
+**Files Removed**:
+- `METRIC_VIEWS_QUERY_GUIDE.md` - Contained outdated `SUM()` syntax
+- `METRIC_VIEWS_VALIDATION_GUIDE.md` - Incomplete, lacked `MEASURE()` examples
 
-**This document contains outdated syntax that will cause errors.**
-
-**Please use the updated guide instead:**
-- METRIC_VIEWS_CORRECT_SYNTAX.md ← Use this for correct query syntax
-
-Key difference: Metric view measures require MEASURE() function,
-not SUM() or other aggregation functions.
-```
-
-**Reason**: Contains 10+ examples using `SUM()` instead of `MEASURE()`
-**Action**: Users redirected to CORRECT_SYNTAX guide
-**Recommendation**: Keep for historical reference, but not for active use
+**Replacements**:
+- Query syntax → [METRIC_VIEWS_CORRECT_SYNTAX.md](invoice_semantic_layer/docs/METRIC_VIEWS_CORRECT_SYNTAX.md)
+- Validation → [validate_metric_views.sql](invoice_semantic_layer/sql_semantic_poc/validate_metric_views.sql)
 
 ---
 
@@ -202,20 +186,17 @@ ORDER BY MEASURE(`Measure Name`) DESC;  -- Use MEASURE() in ORDER BY
 - Proper null handling
 
 ### Documentation Accuracy
-✅ **PASS** - Primary documentation correct:
+✅ **PASS** - All documentation is accurate and current:
 - METRIC_VIEWS_CORRECT_SYNTAX.md: All examples valid
-- 13_METRIC_VIEWS_YAML_GUIDE.md: Now includes query syntax
-- validate_metric_views.sql: Recently updated with MEASURE()
-
-⚠️ **FLAGGED** - Legacy documentation:
-- METRIC_VIEWS_QUERY_GUIDE.md: Deprecated (uses SUM())
-- METRIC_VIEWS_VALIDATION_GUIDE.md: Incomplete (no MEASURE() examples)
+- 13_METRIC_VIEWS_YAML_GUIDE.md: Includes query syntax
+- validate_metric_views.sql: Updated with MEASURE()
+- Deprecated files removed for clean documentation
 
 ### Cross-References
-✅ **PASS** - All documents now cross-reference correctly:
+✅ **PASS** - All documents cross-reference correctly:
 - YAML guide → Query syntax guide
-- Query guide (deprecated) → Correct syntax guide
 - Validation report → All relevant docs
+- No broken links to deprecated files
 
 ---
 
@@ -229,10 +210,9 @@ ORDER BY MEASURE(`Measure Name`) DESC;  -- Use MEASURE() in ORDER BY
 5. **Reference METRIC_VIEWS_VALIDATION_REPORT.md** for column lookups
 
 ### Don'ts ❌
-1. **Don't use METRIC_VIEWS_QUERY_GUIDE.md** (deprecated - has wrong syntax)
-2. **Don't use SUM/AVG/MAX** with metric view measures
-3. **Don't select measures directly** without MEASURE() function
-4. **Don't forget backticks** around column names with spaces
+1. **Don't use SUM/AVG/MAX** with metric view measures
+2. **Don't select measures directly** without MEASURE() function
+3. **Don't forget backticks** around column names with spaces
 
 ---
 
@@ -278,10 +258,6 @@ Run: [validate_metric_views.sql](invoice_semantic_layer/sql_semantic_poc/validat
 - ✅ Cross-references updated
 - ✅ Validation report created
 - ✅ Visual flowcharts added
-
-**Outstanding**:
-- Optional: Update METRIC_VIEWS_VALIDATION_GUIDE.md with MEASURE() examples
-- Optional: Archive or remove METRIC_VIEWS_QUERY_GUIDE.md entirely
 
 **For Stakeholders**:
 Your semantic layer POC has **complete, accurate documentation**. Users can now:
