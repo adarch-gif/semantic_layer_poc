@@ -88,10 +88,13 @@ ORDER BY schema_name, grantee;
 SELECT
   '7. SEMANTIC VIEW DATA SAMPLE' as check_section,
   supplier_name,
-  SUM(total_cost) as total_spend
+  SUM(invoice_amount) as total_invoice_amount,
+  SUM(net_line_amount) as total_net_amount,
+  SUM(freight_cost) as total_freight,
+  SUM(tax_cost) as total_tax
 FROM cfascdodev_primary.invoice_semantic_poc.v_invoice_supplier_semantic_poc
 GROUP BY supplier_name
-ORDER BY total_spend DESC
+ORDER BY total_invoice_amount DESC
 LIMIT 5;
 
 -- ========================================
