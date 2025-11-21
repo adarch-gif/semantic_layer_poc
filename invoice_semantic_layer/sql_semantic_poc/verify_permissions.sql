@@ -2,48 +2,32 @@
 -- COMPREHENSIVE PERMISSION VERIFICATION
 -- Run this after script 08_permissions to verify security model
 -- ========================================
+-- IMPORTANT: Run each section separately in Databricks SQL Editor
+-- SHOW GRANTS statements cannot be used in subqueries
+-- ========================================
 
 USE CATALOG cfascdodev_primary;
 
 -- ========================================
 -- 1. CATALOG-LEVEL PERMISSIONS
 -- ========================================
-SELECT
-  '1. CATALOG PERMISSIONS' as check_section,
-  principal,
-  action_type,
-  'Admins/Engineers should have MANAGE/OWNERSHIP' as expected_result
-FROM (
-  SHOW GRANTS ON CATALOG cfascdodev_primary
-)
-WHERE principal NOT LIKE 'd392185a%' -- Filter out system IDs for readability
-ORDER BY principal;
+-- Run this separately:
+SHOW GRANTS ON CATALOG cfascdodev_primary;
+-- Expected: Admins/Engineers should have MANAGE/OWNERSHIP
 
 -- ========================================
 -- 2. SEMANTIC SCHEMA PERMISSIONS (Should be accessible)
 -- ========================================
-SELECT
-  '2. SEMANTIC SCHEMA PERMISSIONS' as check_section,
-  principal,
-  action_type,
-  object_type,
-  'account users should have USAGE + SELECT on views' as expected_result
-FROM (
-  SHOW GRANTS ON SCHEMA cfascdodev_primary.invoice_semantic_poc
-);
+-- Run this separately:
+SHOW GRANTS ON SCHEMA cfascdodev_primary.invoice_semantic_poc;
+-- Expected: account users should have USAGE + SELECT
 
 -- ========================================
 -- 3. GOLD SCHEMA PERMISSIONS (Should be restricted)
 -- ========================================
-SELECT
-  '3. GOLD SCHEMA PERMISSIONS' as check_section,
-  principal,
-  action_type,
-  object_type,
-  'account users should NOT have SELECT (or very limited)' as expected_result
-FROM (
-  SHOW GRANTS ON SCHEMA cfascdodev_primary.invoice_gold_semantic_poc
-);
+-- Run this separately:
+SHOW GRANTS ON SCHEMA cfascdodev_primary.invoice_gold_semantic_poc;
+-- Expected: account users should NOT have SELECT (or very limited)
 
 -- ========================================
 -- 4. VERIFY SEMANTIC VIEWS ARE ACCESSIBLE
@@ -67,7 +51,7 @@ SELECT
 FROM cfascdodev_primary.invoice_gold_semantic_poc.fact_invoice_line_semantic_poc;
 
 -- ========================================
--- 6. CHECK CURRENT USER ROLE
+-- 6. CHECK CURRENT USER INFO
 -- ========================================
 SELECT
   '6. CURRENT USER INFO' as check_section,
@@ -93,23 +77,16 @@ WHERE table_catalog = 'cfascdodev_primary'
 ORDER BY table_name, grantee;
 
 -- ========================================
--- 8. VERIFY NO FUTURE GRANTS ON GOLD TABLES
+-- 8. CHECK INDIVIDUAL SEMANTIC VIEW PERMISSIONS
 -- ========================================
-SELECT
-  '8. FUTURE GRANTS CHECK' as check_section,
-  principal,
-  action_type,
-  'Future grants on gold tables should be REVOKED for account users' as expected_result
-FROM (
-  SHOW GRANTS ON SCHEMA cfascdodev_primary.invoice_gold_semantic_poc
-)
-WHERE principal = 'account users';
+SHOW GRANTS ON VIEW cfascdodev_primary.invoice_semantic_poc.v_invoice_supplier_semantic_poc;
+-- Expected: account users should have SELECT
 
 -- ========================================
 -- SUMMARY: EXPECTED SECURITY MODEL
 -- ========================================
 -- ✓ Catalog: Admins have MANAGE/OWNERSHIP
--- ✓ Semantic Schema: account users have USAGE + SELECT on views
+-- ✓ Semantic Schema: account users have USAGE + SELECT
 -- ✓ Gold Schema: account users have NO access (REVOKED)
 -- ✓ Semantic Views: account users can SELECT
 -- ✓ Gold Tables: Only admins can SELECT
