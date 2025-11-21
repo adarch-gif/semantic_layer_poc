@@ -5,16 +5,16 @@ This guide explains how to deploy and demo the invoice analytics semantic layer 
 
 ## 2. Environment Configuration
 ## 2a. Document Map
-1. [01_ARCHITECTURE_OVERVIEW.md](../docs/01_ARCHITECTURE_OVERVIEW.md) - High-level architecture summary.
-2. [02_ARCHITECTURE_DETAILED.md](../docs/02_ARCHITECTURE_DETAILED.md) - Detailed playbook with diagrams/personas.
-3. [03_SEMANTIC_COMPONENTS.md](../docs/03_SEMANTIC_COMPONENTS.md) - Explanation of registries and semantic views.
-4. [04_DEPLOYMENT_WALKTHROUGH.md](../docs/04_DEPLOYMENT_WALKTHROUGH.md) - Narrative walkthrough of SQL scripts.
+1. [03_ARCHITECTURE_OVERVIEW.md](../docs/03_ARCHITECTURE_OVERVIEW.md) - High-level architecture summary.
+2. [04_ARCHITECTURE_DETAILED.md](../docs/04_ARCHITECTURE_DETAILED.md) - Detailed playbook with diagrams/personas.
+3. [05_SEMANTIC_COMPONENTS.md](../docs/05_SEMANTIC_COMPONENTS.md) - Explanation of registries and semantic views.
+4. [07_DEPLOYMENT_WALKTHROUGH.md](../docs/07_DEPLOYMENT_WALKTHROUGH.md) - Narrative walkthrough of SQL scripts.
 5. [05_DEPLOYMENT_FLOW_DETAILS.md](../docs/05_DEPLOYMENT_FLOW_DETAILS.md) - Flowchart and step-by-step deployment detail.
-6. [06_SQL_RUNBOOK.md](../docs/06_SQL_RUNBOOK.md) - Script-level explanations, tables/views, and NLQ prompts.
-7. [07_GENIE_SPACE_SETUP.md](../docs/07_GENIE_SPACE_SETUP.md) - Genie Space configuration steps.
-8. [08_DAB_FLOW.md](../docs/08_DAB_FLOW.md) - Asset Bundle automation flow.
-9. [09_DAB_DEPLOYMENT_README.md](../docs/09_DAB_DEPLOYMENT_README.md) - Detailed steps for running the bundle.
-10. [10_UI_DEPLOYMENT_README.md](../docs/10_UI_DEPLOYMENT_README.md) - Run the PoC via the Databricks UI.
+6. [08_SQL_RUNBOOK.md](../docs/08_SQL_RUNBOOK.md) - Script-level explanations, tables/views, and NLQ prompts.
+7. [16_GENIE_SPACE_SETUP.md](../docs/16_GENIE_SPACE_SETUP.md) - Genie Space configuration steps.
+8. [11_DAB_FLOW.md](../docs/11_DAB_FLOW.md) - Asset Bundle automation flow.
+9. [10_DAB_DEPLOYMENT_README.md](../docs/10_DAB_DEPLOYMENT_README.md) - Detailed steps for running the bundle.
+10. [09_UI_DEPLOYMENT_README.md](../docs/09_UI_DEPLOYMENT_README.md) - Run the PoC via the Databricks UI.
 - **Catalog**: `cfascdodev_primary`
 - **Gold schema**: `invoice_gold_semantic_poc`
 - **Semantic schema**: `invoice_semantic_poc`
@@ -123,7 +123,7 @@ Use these in Genie to showcase NLQ accuracy:
 3. Configure benchmarks from the notebook for regression testing.
 4. Grant analysts access once validation succeeds.
 
-Refer to `docs/07_GENIE_SPACE_SETUP.md` for detailed UI steps.
+Refer to `docs/16_GENIE_SPACE_SETUP.md` for detailed UI steps.
 
 ## 9. Operations & Governance
 - Rerun validation whenever models or documentation change.
@@ -132,10 +132,10 @@ Refer to `docs/07_GENIE_SPACE_SETUP.md` for detailed UI steps.
 - Use the DAB pipeline for repeatable promotions across environments.
 
 ## 10. Supporting Documents
-- `docs/06_SQL_RUNBOOK.md` - Deep dive into SQL script behavior and NLQ question rationale.
-- `docs/03_SEMANTIC_COMPONENTS.md` - Relationship/metrics/synonyms semantics overview.
-- `docs/04_DEPLOYMENT_WALKTHROUGH.md` - Narrative walkthrough of each SQL script.
-- `docs/08_DAB_FLOW.md` - How the Asset Bundle configuration works.
+- `docs/08_SQL_RUNBOOK.md` - Deep dive into SQL script behavior and NLQ question rationale.
+- `docs/05_SEMANTIC_COMPONENTS.md` - Relationship/metrics/synonyms semantics overview.
+- `docs/07_DEPLOYMENT_WALKTHROUGH.md` - Narrative walkthrough of each SQL script.
+- `docs/11_DAB_FLOW.md` - How the Asset Bundle configuration works.
 ## 11. Next Steps
 - Swap seed data with production ETL once ready.
 - Automate Genie configuration when APIs become available.

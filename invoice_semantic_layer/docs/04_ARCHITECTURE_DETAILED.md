@@ -243,7 +243,7 @@ Why: Verify Genie accuracy]:::analyticsEngineer
 
   Step14[Step 14: Configure Genie Space
 Inputs: Setup guide
-Action: Apply 07_GENIE_SPACE_SETUP.md
+Action: Apply 16_GENIE_SPACE_SETUP.md
 Outputs: Published Space
 Why: Enable analysts]:::analyticsEngineer
 
@@ -279,7 +279,7 @@ Why: Maintain health]:::platform
 |11 | Test cases | Run `09_validation.sql` | Validation results | Confirms comments, joins, metrics | Platform Admin |
 |12 | Documentation checklist | Run `metadata_gap_report.sql` | Gap report | Identifies missing comments or synonyms | Governance Lead |
 |13 | NLQ scenarios | Run `Benchmark_Questions.sql` | Benchmark outputs | Validates Genie response quality | Analytics Engineer |
-|14 | Space setup guide | Follow `07_GENIE_SPACE_SETUP.md` | Genie Space configured | Makes semantic layer available | Analytics Engineer |
+|14 | Space setup guide | Follow `16_GENIE_SPACE_SETUP.md` | Genie Space configured | Makes semantic layer available | Analytics Engineer |
 |15 | DAB config | Deploy `databricks.yml` | Automated pipeline | Repeatable deployment | Platform Admin |
 |16 | Jobs config | Deploy `jobs.json` | Scheduled validation | Continuous monitoring | Platform Admin |
 

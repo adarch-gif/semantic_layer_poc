@@ -97,13 +97,13 @@ This checklist ensures all stakeholders can successfully deploy the Invoice Anal
 
 - [ ] **Read Required Documentation**
   - [ ] [00_README_START_HERE.md](00_README_START_HERE.md) - Master navigation
-  - [ ] [00_QUICK_START_GUIDE.md](00_QUICK_START_GUIDE.md) - Quickstart overview
-  - [ ] [00_UNDERSTANDING_VIEWS_AND_QUERIES.md](00_UNDERSTANDING_VIEWS_AND_QUERIES.md) - CREATE VIEW behavior
+  - [ ] [01_QUICK_START_GUIDE.md](01_QUICK_START_GUIDE.md) - Quickstart overview
+  - [ ] [02_UNDERSTANDING_VIEWS_AND_QUERIES.md](02_UNDERSTANDING_VIEWS_AND_QUERIES.md) - CREATE VIEW behavior
 
 - [ ] **Bookmarked Reference Documentation**
-  - [ ] [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md) - Script sequence and purpose
-  - [ ] [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md) - Error resolution
-  - [ ] [14_CLEANUP_AND_REDEPLOY_GUIDE.md](14_CLEANUP_AND_REDEPLOY_GUIDE.md) - Cleanup procedures
+  - [ ] [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md) - Script sequence and purpose
+  - [ ] [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md) - Error resolution
+  - [ ] [17_CLEANUP_AND_REDEPLOY_GUIDE.md](17_CLEANUP_AND_REDEPLOY_GUIDE.md) - Cleanup procedures
 
 ### Optional Features Planning
 
@@ -113,7 +113,7 @@ This checklist ensures all stakeholders can successfully deploy the Invoice Anal
   - [ ] Accepted that metric views may fail if feature unavailable
 
 - [ ] **Genie Space Planning**
-  - [ ] Reviewed [07_GENIE_SPACE_SETUP.md](07_GENIE_SPACE_SETUP.md)
+  - [ ] Reviewed [16_GENIE_SPACE_SETUP.md](16_GENIE_SPACE_SETUP.md)
   - [ ] Planned to configure Genie post-deployment
   - [ ] Identified sample questions to test
 
@@ -184,7 +184,7 @@ If using manual UI deployment, execute scripts in this exact order:
   - Expected: 5 metric views created
   - Verification: `SHOW VIEWS IN invoice_semantic_poc LIKE 'mv_%';`
   - Result: ☐ PASS ☐ FAIL
-  - Troubleshooting: If YAML errors occur, see [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md)
+  - Troubleshooting: If YAML errors occur, see [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md)
   - Notes: _______________________________
 
 - [ ] **Step 9: Apply Permissions**
@@ -401,7 +401,7 @@ If using Databricks Asset Bundle (DAB):
   - "Show invoice trends over time": ☐ Answered correctly
   - "Which restaurant has highest spend?": ☐ Answered correctly
 
-See: [07_GENIE_SPACE_SETUP.md](07_GENIE_SPACE_SETUP.md)
+See: [16_GENIE_SPACE_SETUP.md](16_GENIE_SPACE_SETUP.md)
 
 ### BI Tool Connection
 
@@ -430,9 +430,9 @@ See: [07_GENIE_SPACE_SETUP.md](07_GENIE_SPACE_SETUP.md)
 
 ### Reference Documentation Used
 
-- [ ] [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md) - YAML parsing errors
-- [ ] [00_UNDERSTANDING_VIEWS_AND_QUERIES.md](00_UNDERSTANDING_VIEWS_AND_QUERIES.md) - CREATE VIEW confusion
-- [ ] [14_CLEANUP_AND_REDEPLOY_GUIDE.md](14_CLEANUP_AND_REDEPLOY_GUIDE.md) - Starting over
+- [ ] [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md) - YAML parsing errors
+- [ ] [02_UNDERSTANDING_VIEWS_AND_QUERIES.md](02_UNDERSTANDING_VIEWS_AND_QUERIES.md) - CREATE VIEW confusion
+- [ ] [17_CLEANUP_AND_REDEPLOY_GUIDE.md](17_CLEANUP_AND_REDEPLOY_GUIDE.md) - Starting over
 
 ---
 
@@ -462,7 +462,7 @@ Only perform if redeployment is required:
 - [ ] **Ready to Redeploy**
   - Return to Deployment Phase above
 
-See: [14_CLEANUP_AND_REDEPLOY_GUIDE.md](14_CLEANUP_AND_REDEPLOY_GUIDE.md)
+See: [17_CLEANUP_AND_REDEPLOY_GUIDE.md](17_CLEANUP_AND_REDEPLOY_GUIDE.md)
 
 ---
 
@@ -536,5 +536,5 @@ _________________________________________________________________
 
 **For questions or issues, refer to**:
 - Master Documentation: [00_README_START_HERE.md](00_README_START_HERE.md)
-- Quick Start Guide: [00_QUICK_START_GUIDE.md](00_QUICK_START_GUIDE.md)
-- Troubleshooting: [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md)
+- Quick Start Guide: [01_QUICK_START_GUIDE.md](01_QUICK_START_GUIDE.md)
+- Troubleshooting: [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md)

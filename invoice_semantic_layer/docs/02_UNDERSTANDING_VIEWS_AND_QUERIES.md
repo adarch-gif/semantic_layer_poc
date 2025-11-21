@@ -560,10 +560,10 @@ LIMIT 10;
 
 ## 📖 Related Documentation
 
-- **Quick Start**: [00_QUICK_START_GUIDE.md](00_QUICK_START_GUIDE.md)
-- **Metric Views Explained**: [11_METRIC_VIEWS_EXPLAINED.md](11_METRIC_VIEWS_EXPLAINED.md)
-- **Troubleshooting**: [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md)
-- **SQL Runbook**: [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md)
+- **Quick Start**: [01_QUICK_START_GUIDE.md](01_QUICK_START_GUIDE.md)
+- **Metric Views Explained**: [12_METRIC_VIEWS_EXPLAINED.md](12_METRIC_VIEWS_EXPLAINED.md)
+- **Troubleshooting**: [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md)
+- **SQL Runbook**: [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md)
 
 ---
 

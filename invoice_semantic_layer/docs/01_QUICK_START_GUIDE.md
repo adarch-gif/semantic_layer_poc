@@ -84,7 +84,7 @@ databricks bundle run semantic_layer_deploy
 
 **Expected result**: All 22 objects created automatically (2 schemas, 6 gold tables, 6 semantic views, 5 metric views, 3 registries).
 
-📖 **Detailed guide**: [08_DAB_FLOW.md](08_DAB_FLOW.md)
+📖 **Detailed guide**: [11_DAB_FLOW.md](11_DAB_FLOW.md)
 
 ---
 
@@ -117,7 +117,7 @@ databricks bundle run semantic_layer_deploy
 
 **Important**: Scripts 08 and 10 are intentionally out of numeric order - metric views (10) must be created before permissions (08) are applied.
 
-📖 **Detailed walkthrough**: [04_DEPLOYMENT_WALKTHROUGH.md](04_DEPLOYMENT_WALKTHROUGH.md)
+📖 **Detailed walkthrough**: [07_DEPLOYMENT_WALKTHROUGH.md](07_DEPLOYMENT_WALKTHROUGH.md)
 
 ---
 
@@ -221,7 +221,7 @@ SELECT * FROM my_view LIMIT 10;
 - `CREATE VIEW` = Writing down a recipe (no food produced)
 - `SELECT FROM view` = Cooking the recipe (food is produced)
 
-📖 **Complete explanation**: [00_UNDERSTANDING_VIEWS_AND_QUERIES.md](00_UNDERSTANDING_VIEWS_AND_QUERIES.md)
+📖 **Complete explanation**: [02_UNDERSTANDING_VIEWS_AND_QUERIES.md](02_UNDERSTANDING_VIEWS_AND_QUERIES.md)
 
 ---
 
@@ -308,7 +308,7 @@ To enable natural language queries:
    - Metrics registry
    - Synonyms registry
 
-📖 **Detailed setup**: [07_GENIE_SPACE_SETUP.md](07_GENIE_SPACE_SETUP.md)
+📖 **Detailed setup**: [16_GENIE_SPACE_SETUP.md](16_GENIE_SPACE_SETUP.md)
 
 **Example Genie questions**:
 - "What is total spend by supplier?"
@@ -348,7 +348,7 @@ The POC implements a three-layer architecture:
 └─────────────────────────────────────────────────────────┘
 ```
 
-📖 **Detailed architecture**: [01_ARCHITECTURE_OVERVIEW.md](01_ARCHITECTURE_OVERVIEW.md)
+📖 **Detailed architecture**: [03_ARCHITECTURE_OVERVIEW.md](03_ARCHITECTURE_OVERVIEW.md)
 
 ---
 
@@ -366,7 +366,7 @@ The POC implements a three-layer architecture:
 - **Use case**: Dashboards and executive reporting
 - **Example**: `mv_invoice_supplier_semantic_poc`
 
-📖 **Complete comparison**: [11_METRIC_VIEWS_EXPLAINED.md](11_METRIC_VIEWS_EXPLAINED.md)
+📖 **Complete comparison**: [12_METRIC_VIEWS_EXPLAINED.md](12_METRIC_VIEWS_EXPLAINED.md)
 
 ---
 
@@ -397,7 +397,7 @@ The POC deployment is successful when:
 - ✅ Genie can answer benchmark questions
 - ✅ Comment coverage ≥95% on all objects
 
-**Run comprehensive validation**: [00_UNDERSTANDING_VIEWS_AND_QUERIES.md](00_UNDERSTANDING_VIEWS_AND_QUERIES.md) - Section "Complete Verification"
+**Run comprehensive validation**: [02_UNDERSTANDING_VIEWS_AND_QUERIES.md](02_UNDERSTANDING_VIEWS_AND_QUERIES.md) - Section "Complete Verification"
 
 ---
 
@@ -416,7 +416,7 @@ SELECT * FROM cfascdodev_primary.invoice_semantic_poc.v_invoice_supplier_semanti
 **Solution**: Verify permissions using [verify_permissions.sql](../sql_semantic_poc/verify_permissions.sql)
 
 ### Issue: YAML parsing errors in metric views
-**Solution**: Check [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md)
+**Solution**: Check [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md)
 
 ---
 
@@ -435,7 +435,7 @@ DROP SCHEMA IF EXISTS invoice_gold_semantic_poc CASCADE;
 SHOW SCHEMAS LIKE '*semantic_poc*';
 ```
 
-📖 **Complete cleanup guide**: [14_CLEANUP_AND_REDEPLOY_GUIDE.md](14_CLEANUP_AND_REDEPLOY_GUIDE.md)
+📖 **Complete cleanup guide**: [17_CLEANUP_AND_REDEPLOY_GUIDE.md](17_CLEANUP_AND_REDEPLOY_GUIDE.md)
 
 ---
 
@@ -443,10 +443,10 @@ SHOW SCHEMAS LIKE '*semantic_poc*';
 
 After completing this quick start:
 
-1. **Business Stakeholders**: Read [01_ARCHITECTURE_OVERVIEW.md](01_ARCHITECTURE_OVERVIEW.md) for strategic context
-2. **Data Analysts**: Explore [11_METRIC_VIEWS_EXPLAINED.md](11_METRIC_VIEWS_EXPLAINED.md) to understand querying options
-3. **Data Engineers**: Review [02_ARCHITECTURE_DETAILED.md](02_ARCHITECTURE_DETAILED.md) for technical details
-4. **Platform Engineers**: Study [08_DAB_FLOW.md](08_DAB_FLOW.md) for automation
+1. **Business Stakeholders**: Read [03_ARCHITECTURE_OVERVIEW.md](03_ARCHITECTURE_OVERVIEW.md) for strategic context
+2. **Data Analysts**: Explore [12_METRIC_VIEWS_EXPLAINED.md](12_METRIC_VIEWS_EXPLAINED.md) to understand querying options
+3. **Data Engineers**: Review [04_ARCHITECTURE_DETAILED.md](04_ARCHITECTURE_DETAILED.md) for technical details
+4. **Platform Engineers**: Study [11_DAB_FLOW.md](11_DAB_FLOW.md) for automation
 
 ---
 
@@ -455,10 +455,10 @@ After completing this quick start:
 ### Documentation Resources
 
 - **Master Navigation**: [00_README_START_HERE.md](00_README_START_HERE.md)
-- **Understanding Views**: [00_UNDERSTANDING_VIEWS_AND_QUERIES.md](00_UNDERSTANDING_VIEWS_AND_QUERIES.md)
-- **Deployment Guide**: [04_DEPLOYMENT_WALKTHROUGH.md](04_DEPLOYMENT_WALKTHROUGH.md)
-- **SQL Reference**: [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md)
-- **Troubleshooting**: [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md)
+- **Understanding Views**: [02_UNDERSTANDING_VIEWS_AND_QUERIES.md](02_UNDERSTANDING_VIEWS_AND_QUERIES.md)
+- **Deployment Guide**: [07_DEPLOYMENT_WALKTHROUGH.md](07_DEPLOYMENT_WALKTHROUGH.md)
+- **SQL Reference**: [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md)
+- **Troubleshooting**: [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md)
 
 ### External Resources
 
@@ -501,9 +501,9 @@ Before deploying the POC, ensure you have completed all prerequisites:
 
 ### Documentation Readiness
 - [ ] Reviewed [00_README_START_HERE.md](00_README_START_HERE.md) for navigation
-- [ ] Read [00_UNDERSTANDING_VIEWS_AND_QUERIES.md](00_UNDERSTANDING_VIEWS_AND_QUERIES.md) to understand CREATE VIEW behavior
-- [ ] Reviewed [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md) for script sequence
-- [ ] Have [13_METRIC_VIEWS_TROUBLESHOOTING.md](13_METRIC_VIEWS_TROUBLESHOOTING.md) bookmarked for issues
+- [ ] Read [02_UNDERSTANDING_VIEWS_AND_QUERIES.md](02_UNDERSTANDING_VIEWS_AND_QUERIES.md) to understand CREATE VIEW behavior
+- [ ] Reviewed [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md) for script sequence
+- [ ] Have [14_METRIC_VIEWS_TROUBLESHOOTING.md](14_METRIC_VIEWS_TROUBLESHOOTING.md) bookmarked for issues
 
 ### Post-Deployment Verification Plan
 - [ ] Identified which validation queries to run

@@ -503,9 +503,9 @@ SHOW GRANTS ON CATALOG cfascdodev_primary;
 
 ## 📚 Related Documentation
 
-- [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md) - Detailed explanation of each SQL script
-- [08_DAB_FLOW.md](08_DAB_FLOW.md) - Databricks Asset Bundle automation guide
-- [07_GENIE_SPACE_SETUP.md](07_GENIE_SPACE_SETUP.md) - Genie configuration after deployment
+- [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md) - Detailed explanation of each SQL script
+- [11_DAB_FLOW.md](11_DAB_FLOW.md) - Databricks Asset Bundle automation guide
+- [16_GENIE_SPACE_SETUP.md](16_GENIE_SPACE_SETUP.md) - Genie configuration after deployment
 - [README.md](README.md) - Complete deployment guide and overview
 
 ---

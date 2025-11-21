@@ -4,7 +4,7 @@
 
 This POC includes both YAML metric views and SQL semantic views:
 - **File**: `/sql_semantic_poc/10_metric_views_semantic_poc.sql`
-- **Documentation**: `/docs/12_METRIC_VIEWS_YAML_GUIDE.md`
+- **Documentation**: `/docs/13_METRIC_VIEWS_YAML_GUIDE.md`
 
 This guide explains the relationship between semantic views (SQL) and metric views (YAML) in the invoice analytics semantic layer.
 
@@ -456,10 +456,10 @@ Script `08_permissions_semantic_poc.sql` automatically grants access to all view
 
 ## 15. Documentation References
 
-- **Metric Views Guide**: [12_METRIC_VIEWS_YAML_GUIDE.md](12_METRIC_VIEWS_YAML_GUIDE.md)
+- **Metric Views Guide**: [13_METRIC_VIEWS_YAML_GUIDE.md](13_METRIC_VIEWS_YAML_GUIDE.md)
 - **Databricks Docs**: https://docs.databricks.com/aws/en/metric-views/create/sql
-- **SQL Runbook**: [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md)
-- **Deployment Guide**: [04_DEPLOYMENT_WALKTHROUGH.md](04_DEPLOYMENT_WALKTHROUGH.md)
+- **SQL Runbook**: [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md)
+- **Deployment Guide**: [07_DEPLOYMENT_WALKTHROUGH.md](07_DEPLOYMENT_WALKTHROUGH.md)
 
 ---
 
@@ -470,7 +470,7 @@ Script `08_permissions_semantic_poc.sql` automatically grants access to all view
 - **Semantic Views (SQL)**: 6 views for flexible analytics
 - **Metric Views (YAML)**: 5 metric views for governed reporting
 - **Deployment**: Both deployed via scripts 07 and 10 in the DAB pipeline
-- **Documentation**: Complete guide available in `12_METRIC_VIEWS_YAML_GUIDE.md`
+- **Documentation**: Complete guide available in `13_METRIC_VIEWS_YAML_GUIDE.md`
 
 ### Deployment Verification Steps:
 1. Run deployment: `databricks bundle run semantic_layer_deploy`
@@ -479,8 +479,8 @@ Script `08_permissions_semantic_poc.sql` automatically grants access to all view
 4. Test queries against both semantic and metric views
 
 ### Additional Resources:
-- Technical Guide: [12_METRIC_VIEWS_YAML_GUIDE.md](12_METRIC_VIEWS_YAML_GUIDE.md)
-- Script Details: [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md)
+- Technical Guide: [13_METRIC_VIEWS_YAML_GUIDE.md](13_METRIC_VIEWS_YAML_GUIDE.md)
+- Script Details: [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md)
 
 ---
 

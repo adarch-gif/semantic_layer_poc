@@ -392,9 +392,9 @@ If metric view creation fails:
 
 ## Related Documentation
 
-- [11_METRIC_VIEWS_EXPLAINED.md](11_METRIC_VIEWS_EXPLAINED.md) - Complete guide to semantic vs metric views
-- [12_METRIC_VIEWS_YAML_GUIDE.md](12_METRIC_VIEWS_YAML_GUIDE.md) - YAML syntax reference
-- [06_SQL_RUNBOOK.md](06_SQL_RUNBOOK.md) - Deployment sequence
+- [12_METRIC_VIEWS_EXPLAINED.md](12_METRIC_VIEWS_EXPLAINED.md) - Complete guide to semantic vs metric views
+- [13_METRIC_VIEWS_YAML_GUIDE.md](13_METRIC_VIEWS_YAML_GUIDE.md) - YAML syntax reference
+- [08_SQL_RUNBOOK.md](08_SQL_RUNBOOK.md) - Deployment sequence
 - [Databricks Docs](https://docs.databricks.com/aws/en/metric-views/create/sql) - Official documentation
 
 ---
