@@ -49,14 +49,15 @@ DESCRIBE TABLE cfascdodev_primary.invoice_semantic_poc.mv_invoice_supplier_seman
 
 SELECT
   '3. METRIC VIEW DATA CHECK' as validation_step,
-  supplier_name,
-  supplier_category,
-  total_invoice_amount,
-  total_net_amount,
-  total_freight_cost,
-  total_tax_cost,
-  invoice_line_count
+  `Supplier Name`,
+  `Supplier Category`,
+  SUM(`Total Invoice Amount`) as total_invoice_amount,
+  SUM(`Total Net Spend`) as total_net_spend,
+  SUM(`Total Freight Cost`) as total_freight_cost,
+  SUM(`Total Tax Cost`) as total_tax_cost,
+  SUM(`Invoice Line Count`) as invoice_line_count
 FROM cfascdodev_primary.invoice_semantic_poc.mv_invoice_supplier_semantic_poc
+GROUP BY `Supplier Name`, `Supplier Category`
 ORDER BY total_invoice_amount DESC
 LIMIT 10;
 
